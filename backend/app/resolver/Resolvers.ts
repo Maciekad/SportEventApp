@@ -1,12 +1,10 @@
-import events from "../data/dataset"; //get all of the available data from our database.
+import events from "../data/dataset";
 
 const Resolvers = {
   Query: {
-    getAllEvents: () => events, //if the user runs the getAllPeople command
-    //if the user runs the getPerson command:
+    getAllEvents: () => events, 
     getEvent: (_: any, args: any) => { 
       console.log(args);
-      //get the object that contains the specified ID.
       return events.find((event) => event.id === args.id);
     },
   },

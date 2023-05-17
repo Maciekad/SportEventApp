@@ -1,4 +1,4 @@
-import { gql } from "apollo-server-express"; //will create a schema
+import { gql } from "apollo-server-express";
 const Schema = gql`
   type Event {
     id: ID!,
@@ -20,4 +20,3 @@ const Schema = gql`
   }
 `;
 export default Schema; 
-//export this Schema so we can use it in our project
