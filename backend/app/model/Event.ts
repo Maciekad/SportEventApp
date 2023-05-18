@@ -1,4 +1,4 @@
-import { Level } from "./Level";
+import Level from './level';
 
 interface Event {
     id: number,

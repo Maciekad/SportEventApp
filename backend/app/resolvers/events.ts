@@ -1,6 +1,6 @@
 import events from "../data/dataset";
 
-const Resolvers = {
+const eventsResolver = {
   Query: {
     getAllEvents: () => events, 
     getEvent: (_: any, args: any) => { 
@@ -9,4 +9,4 @@ const Resolvers = {
     },
   },
 };
-export default Resolvers;
+export default eventsResolver;

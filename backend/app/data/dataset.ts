@@ -1,5 +1,5 @@
-import Event from "../model/Event";
-import { levels } from "../model/Constants";
+import Event from "../model/event";
+import { levels } from "../model/constants";
 
 const eventsList: Event[] = [
   {

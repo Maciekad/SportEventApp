@@ -1,4 +1,4 @@
-import { Level } from './Level';
+import Level from './level';
 
 export const levels = {
     beginner: <Level>{

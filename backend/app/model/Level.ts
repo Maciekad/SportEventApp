@@ -1,4 +1,6 @@
-export interface Level {
+interface Level {
   num: number;
   description: string;
 }
+
+export default Level;

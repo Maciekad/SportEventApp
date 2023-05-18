@@ -1,5 +1,12 @@
 import { gql } from "apollo-server-express";
-const Schema = gql`
+
+const schema = gql`
+  type Query {
+    getAllEvents: [Event]
+    getAllBookings: [Event]
+    getEvent(id: Int): Event
+    
+  }
   type Event {
     id: ID!,
     title: String,
@@ -14,9 +21,6 @@ const Schema = gql`
     num: Int,
     description: String
   }
-  type Query {
-    getAllEvents: [Event] 
-    getEvent(id: Int): Event
-  }
+  
 `;
-export default Schema; 
+export default schema; 

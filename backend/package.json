@@ -2,11 +2,11 @@
   "name": "sport-events-app-backend",
   "version": "1.0.0",
   "description": "Backend for sport event app",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
     "build": "npx tsc",
-    "start": "node dist/index.js",
-    "dev": "npx nodemon app/index.ts "
+    "start": "node dist/server.js",
+    "dev": "npx nodemon app/server.ts "
   },
   "author": "",
   "license": "ISC",
