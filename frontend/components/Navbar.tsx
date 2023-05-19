@@ -10,7 +10,7 @@ const Navbar = () => {
                 <div className="text-xl">
                     <Link href="/">SportEvents</Link>
                 </div>
-                <ul>
+                {/* <ul>
                     <li className="inline-block px-3">
                         <Link href='/'>Home</Link>
                     </li>
@@ -28,7 +28,7 @@ const Navbar = () => {
                             <button onClick={() => signOut()}>Sign out</button>
                         </li>
                     }
-                </ul>
+                </ul> */}
             </div>
         </nav>
     )
