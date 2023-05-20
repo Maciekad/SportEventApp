@@ -68,11 +68,12 @@ const Dashboard = (
 
     return (
         <Container maxW="container.2xl" px={20}>
-            <Flex p={5} justifyContent='end'>
+            <Flex py={5} justifyContent='space-between' alignItems='center'>
+            <CategorySelector />
                 <Button onClick={onOpen}><Text pr={1}>Filters</Text> <AiFillFilter /></Button>
             </Flex>
             <ModalComponent isOpen={isOpen} onClose={onClose} />
-            {/* <CategorySelector /> */}
+            
             <Grid templateColumns="repeat(4, 1fr)" gap={6}>
                 {events
                     .map((ev: any) => {

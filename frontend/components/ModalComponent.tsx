@@ -11,11 +11,9 @@ interface ModalComponentProps {
 
 const ModalComponent = (props: ModalComponentProps) => {
     const { isOpen, onClose } = props;
-    const [sliderValue, setSliderValue] = useState(50);
 
     const labelStyles = {
         mt: '3',
-        ml: '-2.5',
         fontSize: 'sm',
     }
     return (
@@ -66,17 +64,17 @@ const ModalComponent = (props: ModalComponentProps) => {
                         <Text fontSize={"xl"} fontWeight='semibold' my={4}>
                             Level
                         </Text>
-                        <Slider aria-label='slider-ex-6' step={20}>
-                            <SliderMark value={18} {...labelStyles}>
+                        <Slider aria-label='slider-ex-6' step={10} max={40}>
+                            <SliderMark value={0} {...labelStyles}>
+                            Recreational
+                            </SliderMark>
+                            <SliderMark value={10} {...labelStyles}>
                                 Beginner
                             </SliderMark>
-                            <SliderMark value={38} {...labelStyles}>
-                                Recreational
-                            </SliderMark>
-                            <SliderMark value={58} {...labelStyles}>
+                            <SliderMark value={20} {...labelStyles}>
                                 Semi-advanced
                             </SliderMark>
-                            <SliderMark value={78} {...labelStyles}>
+                            <SliderMark value={30} {...labelStyles}>
                                 Advanced
                             </SliderMark>
                             <SliderTrack>
