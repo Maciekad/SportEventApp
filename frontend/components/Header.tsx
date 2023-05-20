@@ -18,6 +18,7 @@ import {
 } from '@chakra-ui/react';
 import { FaHamburger, FaDoorClosed } from 'react-icons/fa';
 import NextLink from 'next/link';
+import { useSession, signOut, signIn } from 'next-auth/react';
 
 const Links = ['Dashboard', 'Projects', 'Team'];
 
@@ -37,11 +38,12 @@ const NavLink = ({ children }: { children: ReactNode }) => (
 
 export default function Simple() {
     const { isOpen, onOpen, onClose } = useDisclosure();
+    const { data: session, status } = useSession();
 
     return (
         <>
             <Box bg={useColorModeValue('gray.100', 'gray.900')} px={10}>
-                <Flex h={16} alignItems={'center'} justifyContent={'space-between'} px={4}>
+                <Flex h={16} alignItems={'center'} justifyContent={'space-between'} px={12}>
                     <IconButton
                         size={'md'}
                         icon={isOpen ? <FaDoorClosed /> : <FaHamburger />}
@@ -76,10 +78,13 @@ export default function Simple() {
                                 />
                             </MenuButton>
                             <MenuList>
-                                <MenuItem>Link 1</MenuItem>
-                                <MenuItem>Link 2</MenuItem>
+                                {status === "unauthenticated" &&
+                                    <MenuItem onClick={() => signIn()}>Log In</MenuItem>
+                                }
+                                <MenuItem>Register</MenuItem>
                                 <MenuDivider />
-                                <MenuItem>Link 3</MenuItem>
+                                <MenuItem>Help</MenuItem>
+
                             </MenuList>
                         </Menu>
                     </Flex>

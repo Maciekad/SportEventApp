@@ -1,10 +1,22 @@
 import EventItem from "../model/EventItem";
 import { JSXElementConstructor, PromiseLikeOfReactNode, ReactElement, ReactFragment, ReactPortal, useEffect, useState } from 'react';
-import Modal from "../components/Modal";
 import AddressForm from "../components/AddressForm";
 import CategorySelector from "../components/CategorySelector";
 import { useSearchParams } from 'next/navigation';
-import { Button, ButtonGroup, Card, CardBody, CardFooter, Container, Grid, Heading, Stack, Image, Text, Tag, TagCloseButton, TagLabel, HStack, Box } from "@chakra-ui/react";
+import {
+    Button, ButtonGroup, Card, CardBody,
+    CardFooter, Container, Grid, Heading, Stack,
+    Image, Text, Tag, TagCloseButton, TagLabel,
+    HStack, Modal, ModalBody, ModalCloseButton,
+    ModalContent, ModalFooter, ModalHeader,
+    ModalOverlay, useDisclosure, Box, Flex, Divider, Checkbox, CheckboxGroup
+} from "@chakra-ui/react";
+import SearchInput from "./SearchInput";
+import { buttonClass } from "../model/Constants";
+import { AiFillFilter } from "react-icons/ai"
+import { BiTennisBall, BiCycling } from "react-icons/bi";
+import { FaVolleyballBall, FaFutbol, FaBasketballBall } from "react-icons/fa";
+import ModalComponent from "./ModalComponent";
 
 
 interface DashboardPageProps {
@@ -18,6 +30,7 @@ const Dashboard = (
     const [events, setEvents] = useState(props.events);
     const [filter, setFilter] = useState('');
     const [modalIsOpen, setModalIsOpen] = useState(false);
+    const { isOpen, onOpen, onClose } = useDisclosure()
     const searchParams = useSearchParams();
 
     useEffect(() => {
@@ -53,27 +66,13 @@ const Dashboard = (
         return false;
     }
 
-    const openModal = () => {
-        setModalIsOpen(true);
-    };
-
-    const closeModal = () => {
-        setModalIsOpen(false);
-    };
-
     return (
-        <Container maxW="container.2xl" px={10}>
-            {/* <div className="px-20">
-                <SearchInput onSearchTextChanged={onSearchTextChanged} />
-                <button
-                    className={buttonClass}
-                    onClick={openModal}>
-                    Open modal
-                </button>
-            </div> */}
-            {/* <Box p={4}>
-                <CategorySelector />
-            </Box> */}
+        <Container maxW="container.2xl" px={20}>
+            <Flex p={5} justifyContent='end'>
+                <Button onClick={onOpen}><Text pr={1}>Filters</Text> <AiFillFilter /></Button>
+            </Flex>
+            <ModalComponent isOpen={isOpen} onClose={onClose} />
+            {/* <CategorySelector /> */}
             <Grid templateColumns="repeat(4, 1fr)" gap={6}>
                 {events
                     .map((ev: any) => {
@@ -123,13 +122,6 @@ const Dashboard = (
                         </Card>
                     })}
             </Grid>
-            {modalIsOpen &&
-                <Modal onCancel={closeModal} onSubmit={closeModal}>
-                    <AddressForm />
-                </Modal>}
-
-
-            
         </Container>
     )
 }
