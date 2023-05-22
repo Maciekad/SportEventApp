@@ -2,24 +2,48 @@ import { ApolloServer } from "apollo-server-express";
 import schema from "./schema";
 import rootResolver from "./resolvers";
 import express from "express";
-import { ApolloServerPluginDrainHttpServer } from "apollo-server-core";
 import http from "http";
+import * as dotenv from "dotenv";
+import jwt from 'jsonwebtoken';
 
-async function startApolloServer(schema: any, resolvers: any) {
-  const app = express();
-  const httpServer = http.createServer(app);
-  const server = new ApolloServer({
-    typeDefs: schema,
-    resolvers,
-    //tell Express to attach GraphQL functionality to the server
-    plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
-  }) as any;
-  await server.start(); //start the GraphQL server.
-  server.applyMiddleware({ app });
-  await new Promise<void>((resolve) =>
-    httpServer.listen({ port: 4000 }, resolve) //run the server on port 4000
-  );
-  console.log(`Server ready at http://localhost:4000${server.graphqlPath}`);
+dotenv.config();
+
+const { PORT, JWT_SECRET } = process.env
+
+const getUser = (token: string) => {
+  try {
+    if (token) {
+      return jwt.verify(token, JWT_SECRET as string)
+    }
+    return null;
+  } catch (error) {
+    return null
+  }
 }
-//in the end, run the server and pass in our Schema and Resolver.
-startApolloServer(schema, rootResolver);
+
+const app = express();
+
+let server: any = null;
+
+const startServer = async () => {
+  server = new ApolloServer({
+    typeDefs: schema,
+    resolvers: rootResolver,
+    context: ({ req }) => {
+      const token = req.get('Authorization') || ''
+      return { user: getUser(token.replace('Bearer', '')) }
+    }
+  });
+
+  await server.start();
+  server.applyMiddleware({ app });
+}
+
+startServer();
+
+// handling REST api calls
+const httpserver = http.createServer(app);
+
+app.listen({ port: PORT }, () =>
+  console.log(`🚀 Server ready at http://localhost:${PORT}${server.graphqlPath}`)
+);
