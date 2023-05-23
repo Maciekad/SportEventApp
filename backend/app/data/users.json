@@ -1,9 +1,9 @@
 [
-    {
-        "id": 1,
-        "firstName": "John",
-        "lastName": "Doe",
-        "password": "Test123",
-        "email": "john@gmail.com"
-    }
+  {
+    "id": 1,
+    "firstName": "Maciej",
+    "lastName": "Kowal",
+    "password": "$2a$10$amxp8wIalN3NLuJXW0tw.eR.Z3PkGN940Px7vd1IiBqXcmyjrv.cy",
+    "email": "m.kowal@gmail.com"
+  }
 ]

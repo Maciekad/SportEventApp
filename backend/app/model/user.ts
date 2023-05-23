@@ -1,9 +1,9 @@
 interface User {
-    id: Number,
-    firstName: String,
-    lastName: String,
-    password: String,
-    email: String
+    id: number,
+    firstName: string,
+    lastName: string,
+    password: string,
+    email: string
 }
 
 export default User;

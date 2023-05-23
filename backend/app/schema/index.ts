@@ -6,19 +6,20 @@ const schema = gql`
     getAllBookings: [Event]
     getEvent(id: Int): Event
     getUserById(id: Int): User
+    getAllUsers: [User]
   }
 
   type Mutation {
-    registerUser(firstName: String!, lastName: String!, id: ID!, email: String!, password: String!): AuthPayload!
+    registerUser(firstName: String!, lastName: String!, email: String!, password: String!): AuthPayload!
     login(email: String!, password: String!): AuthPayload!
   }
 
   type User {
-    id: ID!,
-    firstName: String!,
-    lastName: String!,
-    password: String!,
-    email: String!
+    id: ID,
+    firstName: String,
+    lastName: String,
+    password: String,
+    email: String
   }
 
   type AuthPayload {

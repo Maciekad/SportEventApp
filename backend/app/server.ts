@@ -1,6 +1,6 @@
 import { ApolloServer } from "apollo-server-express";
 import schema from "./schema";
-import rootResolver from "./resolvers";
+import rootResolver from "./resolvers/root";
 import express from "express";
 import http from "http";
 import * as dotenv from "dotenv";

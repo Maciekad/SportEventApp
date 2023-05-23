@@ -1,11 +1,13 @@
-import { getUserById } from "../services/userService"
+import { getAllUsers, getUserById } from "../services/userService"
 
 const usersResolver = {
     Query: {
         getUserById: async (_: any, args: any) => {
-            console.log(args.id);
             return await getUserById(args.id);
         },
+        getAllUsers: async () => {
+            return await getAllUsers();
+        }
     },
 };
 export default usersResolver;
