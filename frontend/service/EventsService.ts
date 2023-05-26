@@ -1,4 +1,4 @@
-import request, { gql } from "graphql-request";
+import request, { gql, GraphQLClient } from "graphql-request";
 
 const getAllEventsQuery = gql`
   query {
@@ -19,7 +19,8 @@ const getAllEventsQuery = gql`
 `;
 
 export const getEventsList = async (): Promise<any> => {
-    const res = await request<any>("http://localhost:4000/graphql", getAllEventsQuery);
+    const res = await request<any>("http://localhost:8000/graphql", getAllEventsQuery);
+    console.log(res)
     const result = res.getAllEvents;
     return result
 }

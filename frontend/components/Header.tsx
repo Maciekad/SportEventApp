@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { ReactNode, useEffect, useState } from 'react';
 import {
     Box,
     Flex,
@@ -15,10 +15,11 @@ import {
     useDisclosure,
     useColorModeValue,
     Stack,
+    Text
 } from '@chakra-ui/react';
 import { FaHamburger, FaDoorClosed } from 'react-icons/fa';
 import NextLink from 'next/link';
-import { useSession, signOut, signIn } from 'next-auth/react';
+import { IAuth, useAuth } from '../lib/auth';
 
 const Links = ['Dashboard', 'Projects', 'Team'];
 
@@ -38,7 +39,8 @@ const NavLink = ({ children }: { children: ReactNode }) => (
 
 export default function Simple() {
     const { isOpen, onOpen, onClose } = useDisclosure();
-    const { data: session, status } = useSession();
+    const { currentUser } = useAuth() as IAuth;
+
 
     return (
         <>
@@ -64,6 +66,7 @@ export default function Simple() {
                     </HStack>
                     <Flex alignItems={'center'}>
                         <Menu>
+                            <Text pr={2}>{currentUser?.email}</Text>
                             <MenuButton
                                 as={Button}
                                 rounded={'full'}
@@ -78,28 +81,30 @@ export default function Simple() {
                                 />
                             </MenuButton>
                             <MenuList>
-                                {status === "unauthenticated" &&
-                                    <MenuItem onClick={() => signIn()}>Log In</MenuItem>
-                                }
-                                <MenuItem>Register</MenuItem>
+                                
+                                <MenuItem><Link style={{ textDecoration: 'none' }} as={NextLink} href="/login">Log in</Link></MenuItem>
+                                <MenuItem><Link style={{ textDecoration: 'none' }} as={NextLink} href="/login">Log in</Link></MenuItem>
+                                <MenuItem><Link style={{ textDecoration: 'none' }} as={NextLink} href="/register">Register</Link></MenuItem>
                                 <MenuDivider />
                                 <MenuItem>Help</MenuItem>
 
                             </MenuList>
                         </Menu>
-                    </Flex>
+                    </Flex> 
                 </Flex>
 
-                {isOpen ? (
-                    <Box pb={4} display={{ md: 'none' }}>
-                        <Stack as={'nav'} spacing={4}>
-                            {Links.map((link) => (
-                                <NavLink key={link}>{link}</NavLink>
-                            ))}
-                        </Stack>
-                    </Box>
-                ) : null}
-            </Box>
+                {
+                    isOpen ? (
+                        <Box pb={4} display={{ md: 'none' }} >
+                            <Stack as={'nav'} spacing={4}>
+                                {Links.map((link) => (
+                                    <NavLink key={link}>{link}</NavLink>
+                                ))}
+                            </Stack>
+                        </Box >
+                    ) : null
+                }
+            </Box >
         </>
     );
 }

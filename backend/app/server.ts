@@ -1,4 +1,4 @@
-import { ApolloServer } from "apollo-server-express";
+import { ApolloServer, AuthenticationError } from "apollo-server-express";
 import schema from "./schema";
 import rootResolver from "./resolvers/root";
 import express from "express";
@@ -10,17 +10,6 @@ dotenv.config();
 
 const { PORT, JWT_SECRET } = process.env
 
-const getUser = (token: string) => {
-  try {
-    if (token) {
-      return jwt.verify(token, JWT_SECRET as string)
-    }
-    return null;
-  } catch (error) {
-    return null
-  }
-}
-
 const app = express();
 
 let server: any = null;
@@ -29,9 +18,20 @@ const startServer = async () => {
   server = new ApolloServer({
     typeDefs: schema,
     resolvers: rootResolver,
-    context: ({ req }) => {
-      const token = req.get('Authorization') || ''
-      return { user: getUser(token.replace('Bearer', '')) }
+    context: async ({ req }) => {
+      const token = req.get('Authorization')?.split(' ')[1] as string;
+
+      if (!token) {
+        return null;
+      }
+
+      try {
+        // Verify and decode the JWT token
+        const user = jwt.verify(token, JWT_SECRET as string);
+        return { user };
+      } catch (error) {
+        throw new AuthenticationError('Invalid or expired token');
+      }
     }
   });
 

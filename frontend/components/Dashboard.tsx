@@ -1,6 +1,6 @@
 import EventItem from "../model/EventItem";
 import { JSXElementConstructor, PromiseLikeOfReactNode, ReactElement, ReactFragment, ReactPortal, useEffect, useState } from 'react';
-import AddressForm from "../components/AddressForm";
+import AddressForm from "./Forms/AddressForm";
 import CategorySelector from "../components/CategorySelector";
 import { useSearchParams } from 'next/navigation';
 import {

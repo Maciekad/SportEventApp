@@ -1,8 +1,8 @@
 import { useState } from "react";
-import parseAddress, { AddressModel } from "../model/AddressModel";
-import { sulkowiceCoordinates, buttonClass } from '../model/Constants';
-import { Coordinates } from "../model/Coordinates";
-import GoogleMapComponent from "./GoogleMap"
+import parseAddress, { AddressModel } from "../../model/AddressModel";
+import { sulkowiceCoordinates, buttonClass } from '../../model/Constants';
+import { Coordinates } from "../../model/Coordinates";
+import GoogleMapComponent from "../GoogleMap"
 
 const AddressForm = () => {
     const [selectedAddress, selectAddress] = useState('');

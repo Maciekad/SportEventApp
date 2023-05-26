@@ -1,7 +1,7 @@
 import { Modal, ModalOverlay, ModalContent, ModalHeader, Divider, ModalCloseButton, ModalBody, Grid, CheckboxGroup, Text, Stack, Checkbox, ModalFooter, Button, Box, Slider, SliderMark, SliderFilledTrack, SliderThumb, SliderTrack } from "@chakra-ui/react";
 import { BiTennisBall } from "react-icons/bi";
 import { FaVolleyballBall, FaFutbol, FaBasketballBall } from "react-icons/fa";
-import AddressForm from "./AddressForm";
+import AddressForm from "./Forms/AddressForm";
 import { useState } from "react";
 
 interface ModalComponentProps {
