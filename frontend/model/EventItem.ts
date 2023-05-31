@@ -1,3 +1,4 @@
+import { AddressModel } from "./AddressModel";
 import { Level } from "./Level";
 
 interface EventItem {
@@ -8,7 +9,8 @@ interface EventItem {
     availablePlaces: number,
     signedPeople: number,
     level: Level;
-    tags: string[]
+    tags: string[];
+    address: AddressModel;
 }
 
 export default EventItem;

@@ -1,13 +1,13 @@
 export class AddressModel {
 
     constructor() {
-        this.address = '';
+        this.street = '';
         this.city = '';
         this.postCode = '';
         this.country = '';
     }
 
-    address: string;
+    street: string;
     city: string;
     postCode: string;
     country: string;
@@ -22,7 +22,7 @@ const parseAddress = (text: string) => {
 
             address = new AddressModel();
             
-            address.address = splitted[0];
+            address.street = splitted[0];
             address.country = splitted[2].trim();
 
             let trimmed = splitted[1].trim();

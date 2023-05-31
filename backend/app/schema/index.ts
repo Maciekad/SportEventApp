@@ -35,7 +35,15 @@ const schema = gql`
     availablePlaces: String,
     signedPeople: Int,
     level: Level,
-    tags: [String]
+    tags: [String],
+    address: Address
+  }
+
+  type Address {
+    street: String,
+    city: String,
+    postCode: String,
+    country: String
   }
 
   type Level {

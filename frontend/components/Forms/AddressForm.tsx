@@ -2,85 +2,46 @@ import { useState } from "react";
 import parseAddress, { AddressModel } from "../../model/AddressModel";
 import { sulkowiceCoordinates, buttonClass } from '../../model/Constants';
 import { Coordinates } from "../../model/Coordinates";
-import GoogleMapComponent from "../GoogleMap"
+import Map from "../GoogleMap"
+import { getAddressFromCoordinates, getCoordinatesFromAddress } from "../../utils/mapUtils";
 
 const AddressForm = () => {
-    const [selectedAddress, selectAddress] = useState('');
-    const [coordinates, setCoordinates] = useState(sulkowiceCoordinates);
+    const [selectedAddress, selectAddress] = useState<string | null>('');
+    const [coordinates, setCoordinates] = useState<Coordinates | null>(sulkowiceCoordinates);
 
-    const onMapLoaded = (coordinates: Coordinates) => {
-        getAddressFromCoordinates(coordinates);
+    const onMapLoaded = async (coordinates: Coordinates) => {
+        const address = await getAddressFromCoordinates(coordinates);
+        selectAddress(address);
     }
 
-    const onMapClicked = (coordinates: Coordinates) => {
-        getAddressFromCoordinates(coordinates);
+    const onMapClicked = async (coordinates: Coordinates) => {
+        const address = await getAddressFromCoordinates(coordinates);
+        selectAddress(address);
     }
 
-    const handleSubmit = (event: any) => {
+    const handleSubmit = async (event: any) => {
         // Stop the form from submitting and refreshing the page.
         event.preventDefault()
 
         // Get data from the form.
         const address = new AddressModel();
-        address.address = event.target.street.value;
+        address.street = event.target.street.value;
         address.city = event.target.city.value;
         address.postCode = event.target.postCode.value;
         address.country = event.target.country.value;
 
-        const newString = `${address.address}, ${address.postCode} ${address.city}, ${address.country}`;
+        const newString = `${address.street}, ${address.postCode} ${address.city}, ${address.country}`;
 
         selectAddress(newString);
 
-        getCoordinatesFromAddress(newString);
-    }
-
-    const getAddressFromCoordinates = (coordinates: Coordinates) => {
-
-        const geocoder = new google.maps.Geocoder();
-
-        geocoder.geocode({ location: coordinates })
-            .then((response) => {
-                if (response.results.length > 0) {
-                    const addressObj = parseAddress(response.results[0].formatted_address);
-                    
-                    const newString = addressObj === null ? "Choose another adress" :
-                        `${addressObj.address}, ${addressObj.postCode} ${addressObj.city}, ${addressObj.country}`;
-
-                    selectAddress(newString);
-                }
-                else {
-                    console.info(`No geocoder results found for lat: ${coordinates.lat}, lng: ${coordinates.lng}.`);
-                }
-            })
-            .catch((error) => console.error(`Geocoder failed due to: ${error}`));
-    }
-
-    const getCoordinatesFromAddress = (address: string) => {
-
-        const geocoder = new google.maps.Geocoder();
-        
-        geocoder.geocode({ address: address })
-            .then((response) => {
-                if (response.results.length > 0) {
-
-                    const lat = response.results[0].geometry.location?.lat() ?? 0;
-                    const lng = response.results[0].geometry.location?.lng() ?? 0;
-
-                    let coordinates: Coordinates = { lat: lat, lng: lng};
-
-                    setCoordinates(coordinates);
-                }
-                else {
-                    console.info(`No geocoder results found for address: ${address}.`);
-                }
-            })
-            .catch((error) => console.error(`Geocoder failed due to: ${error}`));
+        const coordinates = await getCoordinatesFromAddress(address);
+        setCoordinates(coordinates);
     }
 
     return (
         <div className="grid grid-cols-2 gap-1">
             <div>
-                <GoogleMapComponent  onMapLoaded={onMapLoaded} onMapClicked={onMapClicked} center={coordinates}/>
+                <Map height="400px" zoom={10} onMapLoaded={onMapLoaded} onMapClicked={onMapClicked} markers={[coordinates] as Coordinates[]} center={coordinates as Coordinates}/>
                 {selectedAddress}
             </div>
             <form className="px-8 pt-6 pb-8 mb-4" onSubmit={handleSubmit}>

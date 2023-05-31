@@ -4,19 +4,23 @@ import { config } from "@fortawesome/fontawesome-svg-core";
 config.autoAddCss = false; // Tell Font Awesome to skip adding the CSS automatically since it's being imported above
 
 import { ChakraProvider } from '@chakra-ui/react';
-import Header from '../components/Header';
+import Navbar from '../components/Navbar';
 import { AuthProvider } from '../lib/auth';
-
-
+import { LoadingProgressProvider } from '../lib/loadingProgress';
+import MainLayout from '../components/Layouts/MainLayout';
 
 function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <ChakraProvider>
-      <AuthProvider>
-        <Header />
-        <Component {...pageProps} />
-      </AuthProvider>
+      <LoadingProgressProvider>
+        <AuthProvider>
+          <MainLayout>
+            <Navbar />
+            <Component {...pageProps} />
+          </MainLayout>
+        </AuthProvider>
+      </LoadingProgressProvider>
     </ChakraProvider>
   )
 }

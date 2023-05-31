@@ -1,3 +1,4 @@
+import Address from './address';
 import Level from './level';
 
 interface Event {
@@ -8,7 +9,8 @@ interface Event {
     availablePlaces: number,
     signedPeople: number,
     level: Level;
-    tags: string[]
+    tags: string[];
+    address: Address | null;
 }
 
 export default Event;

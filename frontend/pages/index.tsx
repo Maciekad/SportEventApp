@@ -3,12 +3,17 @@ import { getEventsList } from "../service/EventsService";
 import Dashboard from "../components/Dashboard";
 
 
+
 const Home: NextPage = ({
   result,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
 
+  
+
   return (
-    <><Dashboard events={result}/></>
+    <><Dashboard events={result} />
+      
+    </>
   )
 }
 

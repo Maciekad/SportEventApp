@@ -6,6 +6,7 @@ import { User } from "../model/User";
 export interface IAuth {
     logout: () => void;
     login: (login: Login) => Promise<void>;
+    isLoggedIn: boolean,
     currentUser: User | undefined;
 }
 

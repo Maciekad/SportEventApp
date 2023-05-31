@@ -14,13 +14,19 @@ const getAllEventsQuery = gql`
             description
         }
         tags
+        address {
+          street
+          city
+          postCode
+          country
+        }
     }
   }
 `;
 
 export const getEventsList = async (): Promise<any> => {
-    const res = await request<any>("http://localhost:8000/graphql", getAllEventsQuery);
-    console.log(res)
-    const result = res.getAllEvents;
-    return result
+  const res = await request<any>("http://localhost:8000/graphql", getAllEventsQuery);
+  console.log(res)
+  const result = res.getAllEvents;
+  return result
 }

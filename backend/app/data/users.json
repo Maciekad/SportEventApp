@@ -5,5 +5,19 @@
     "lastName": "Kowal",
     "password": "$2a$10$amxp8wIalN3NLuJXW0tw.eR.Z3PkGN940Px7vd1IiBqXcmyjrv.cy",
     "email": "m.kowal@gmail.com"
+  },
+  {
+    "id": 10,
+    "firstName": "Filip",
+    "lastName": "Adrych",
+    "password": "$2a$10$IYJkYGSXtbndycN5vgcu1.lut9.rgOzI/audAa1Vrqp4arh6xkU6m",
+    "email": "dupa.blada@gmail.com"
+  },
+  {
+    "id": 40,
+    "firstName": "Ryba",
+    "lastName": "Rybacka",
+    "password": "$2a$10$4sTLtrpKtxK93.bWnn8hV.iE5ogWva6CT2Q4A12rmNeX./2DoUMiK",
+    "email": "m.ryba@gmail.com"
   }
 ]

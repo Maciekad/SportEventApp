@@ -1,36 +1,35 @@
 import EventItem from "../model/EventItem";
-import { JSXElementConstructor, PromiseLikeOfReactNode, ReactElement, ReactFragment, ReactPortal, useEffect, useState } from 'react';
-import AddressForm from "./Forms/AddressForm";
+import { useEffect } from 'react';
 import CategorySelector from "../components/CategorySelector";
 import { useSearchParams } from 'next/navigation';
 import {
-    Button, ButtonGroup, Card, CardBody,
-    CardFooter, Container, Grid, Heading, Stack,
-    Image, Text, Tag, TagCloseButton, TagLabel,
-    HStack, Modal, ModalBody, ModalCloseButton,
-    ModalContent, ModalFooter, ModalHeader,
-    ModalOverlay, useDisclosure, Box, Flex, Divider, Checkbox, CheckboxGroup
+    Container, Grid, useDisclosure, usePanGesture
 } from "@chakra-ui/react";
-import SearchInput from "./SearchInput";
-import { buttonClass } from "../model/Constants";
-import { AiFillFilter } from "react-icons/ai"
-import { BiTennisBall, BiCycling } from "react-icons/bi";
-import { FaVolleyballBall, FaFutbol, FaBasketballBall } from "react-icons/fa";
 import ModalComponent from "./ModalComponent";
-
+import Map from "../components/GoogleMap";
+import { useState } from "react";
+import { Coordinates } from "../model/Coordinates";
+import EventsList from "./EventsList";
+import { getAddressFromCoordinates, getCoordinatesFromAddress } from "../utils/mapUtils";
+import Address from "../model/Address";
+import { googleMapsApiKey, sulkowiceCoordinates } from "../model/Constants";
+import { useJsApiLoader } from "@react-google-maps/api";
 
 interface DashboardPageProps {
-    events: any;
+    events: EventItem[];
 }
 
 const Dashboard = (
     props: DashboardPageProps,
 ) => {
 
-    const [events, setEvents] = useState(props.events);
+    const [events, setEvents] = useState<EventItem[]>(props.events);
     const [filter, setFilter] = useState('');
-    const [modalIsOpen, setModalIsOpen] = useState(false);
-    const { isOpen, onOpen, onClose } = useDisclosure()
+    const [showMap, setShowMap] = useState(false);
+    const [center, setCenter] = useState<Coordinates>(sulkowiceCoordinates);
+    const [markers, setMarkers] = useState<Coordinates[]>();
+
+    const { isOpen, onOpen, onClose } = useDisclosure();
     const searchParams = useSearchParams();
 
     useEffect(() => {
@@ -39,18 +38,13 @@ const Dashboard = (
     }, [searchParams]);
 
     useEffect(() => {
-
-        console.log(filter)
         const eventsTemp: any[] = props.events
             .filter((ev: any) => filterEvent(ev));
 
         setEvents(eventsTemp);
+        if (showMap) setCoordinates(eventsTemp);
 
     }, [filter]);
-
-    const onSearchTextChanged = (text: string) => {
-        setFilter(text);
-    }
 
     const filterEvent = (ev: EventItem): boolean => {
 
@@ -66,63 +60,22 @@ const Dashboard = (
         return false;
     }
 
+    const setCoordinates = async (events: EventItem[]) => {
+        const addresses = events.filter(ev => ev.address).map(ev => ev.address);
+        const promises = addresses.map(async ad => await getCoordinatesFromAddress(ad));
+        const markers = await Promise.all(promises);
+        setMarkers(markers as Coordinates[])
+    }
+
+    const onMapLoaded = async () => {
+        setCoordinates(events);
+    }
+
     return (
-        <Container maxW="container.2xl" px={20}>
-            <Flex py={5} justifyContent='space-between' alignItems='center'>
-            <CategorySelector />
-                <Button onClick={onOpen}><Text pr={1}>Filters</Text> <AiFillFilter /></Button>
-            </Flex>
+        <Container maxW="container.2xl" px={0}>
+            <CategorySelector onModalOpen={onOpen} isMapOpen={showMap} onMapOpen={() => setShowMap((current) => !current)} />
             <ModalComponent isOpen={isOpen} onClose={onClose} />
-            
-            <Grid templateColumns="repeat(4, 1fr)" gap={6}>
-                {events
-                    .map((ev: any) => {
-                        return <Card maxW='sm'>
-                            <CardBody>
-                                <Image
-                                    src={ev.img}
-                                    alt='Green double couch with wooden legs'
-                                    borderRadius='lg'
-                                />
-                                <Stack mt='6' spacing='3'>
-                                    <Heading size='md'>{ev.title}</Heading>
-                                    <Text>
-                                        {ev.description}
-                                    </Text>
-                                    <Text color='blue.600' fontSize='2xl'>
-                                        {ev.signedPeople}/{ev.availablePlaces}
-                                    </Text>
-                                    <Text>
-                                        {ev.level.description}
-                                    </Text>
-                                    <HStack spacing={2}>
-                                        {ev.tags.map((item: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | ReactFragment | ReactPortal | PromiseLikeOfReactNode | null | undefined) => {
-                                            return <Tag
-                                                size="sm"
-                                                key="md"
-                                                borderRadius='full'
-                                                colorScheme='gray'
-                                            >
-                                                <TagLabel>{item}</TagLabel>
-                                                <TagCloseButton />
-                                            </Tag>
-                                        })}
-                                    </HStack>
-                                </Stack>
-                            </CardBody>
-                            <CardFooter>
-                                <ButtonGroup spacing='2'>
-                                    <Button variant='solid' colorScheme='blue'>
-                                        Buy now
-                                    </Button>
-                                    <Button variant='ghost' colorScheme='blue'>
-                                        Add to cart
-                                    </Button>
-                                </ButtonGroup>
-                            </CardFooter>
-                        </Card>
-                    })}
-            </Grid>
+            {showMap ? <Map height={"700px"} zoom={10} onMapLoaded={onMapLoaded} markers={markers as Coordinates[]} center={center as Coordinates} /> : <EventsList events={events} />}
         </Container>
     )
 }

@@ -44,7 +44,7 @@ export const signIn = async (login: Login): Promise<any> => {
     }
 }
 
-export const register = async (user: User): Promise<AuthPayload> => {
+export const registerUser = async (user: User): Promise<AuthPayload> => {
     try {
         const result = await graphQLClient.request<AuthPayload>(registerMutation, { email: user.email, firstName: user.firstName, lastName: user.lastName, password: user.password })
         return result;
