@@ -48,29 +48,22 @@ const CategorySelector = (props: CategorySelectorProps) => {
             <Flex py={5} justifyContent="space-between">
                 {categories
                     .map((c, index) =>
-                        <Box onClick={() => onCategoryChanged(c.name)}
+                        <Button onClick={() => onCategoryChanged(c.name)}
                             key={index}
-                            as="button"
-                            _hover={{ border: '1px' }}
-                            _focus={{
-                                border: '1px',
-                                bg: '#F7F7F7'
-                            }}
-                            fontSize='sm'
-                            border='1px'
-                            borderRadius={10}
-                            borderColor='gray.200'
-                            p={3}
+                            p={5}
+                            backgroundColor='white'
+                            variant={"outline"}
+                            size={"sm"}
                             mr={3}>
                             <Flex alignItems='center'>{c.icon}
                                 <Text pl={2} fontWeight={'semibold'}>{c.name}</Text></Flex>
-                        </Box>
+                        </Button>
                     )}
             </Flex>
             <Flex>
-                <Button mr={2} onClick={props.onMapOpen}><Text pr={1}>{props.isMapOpen ? "Hide" : "Show"} Map</Text> <FaMap /></Button>
+                <Button p={5} size={"sm"} variant={"outline"} bgColor={"white"} mr={2} onClick={props.onMapOpen}><Text pr={1}>{props.isMapOpen ? "Hide" : "Show"} Map</Text> <FaMap/></Button>
 
-                <Button onClick={props.onModalOpen}><Text pr={1}>Filters</Text> <AiFillFilter /></Button>
+                <Button p={5} size={"sm"} variant={"outline"} bgColor={"white"} onClick={props.onModalOpen}><Text pr={1}>Filters</Text> <AiFillFilter /></Button>
             </Flex>
         </Flex>
     );

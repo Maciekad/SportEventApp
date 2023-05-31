@@ -37,9 +37,9 @@ const MainLayout = ({ children, ...props }: Props) => {
     }, [])
 
     return (
-        <>
+        <Container maxW="container.2xl" bgColor={"whitesmoke"} px={0}>
             {children}
-        </>
+        </Container>
     )
 }
 

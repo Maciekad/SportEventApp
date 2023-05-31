@@ -42,7 +42,7 @@ export default function Navbar() {
 
     return (
         <>
-            <Box bg={useColorModeValue('gray.100', 'gray.900')} px={12}>
+            <Box bgColor={"green.500"} color={"white"} borderBottom={"1px"} borderColor={"gray.200"} px={12}>
                 <Flex h={16} alignItems={'center'} justifyContent={'space-between'} px={12}>
                     <IconButton
                         size={'md'}
@@ -52,10 +52,11 @@ export default function Navbar() {
                         onClick={isOpen ? onClose : onOpen}
                     />
                     <HStack spacing={8} alignItems={'center'}>
-                        <Box><Link fontSize={'lg'} style={{ textDecoration: 'none' }} as={NextLink} href="/">SportEvents</Link></Box>
+                        <Box><Link fontWeight={"semibold"} fontSize={'lg'} style={{ textDecoration: 'none' }} as={NextLink} href="/">SportEvents</Link></Box>
                     </HStack>
                     <Flex alignItems={'center'}>
                         <Menu>
+                            <Button p={4} _hover={{ border: '1px', bgColor: "green.400" }} size={"sm"} variant={"outline"}>Create your event</Button>
                             <Text pr={2}>{currentUser?.email}</Text>
                             <MenuButton
                                 as={Button}
@@ -71,14 +72,14 @@ export default function Navbar() {
                                 />
                             </MenuButton>
                             <MenuList>
-                                {!isLoggedIn && <MenuItem><Link style={{ textDecoration: 'none' }} as={NextLink} href="/register">Register</Link></MenuItem>}
+                                {!isLoggedIn && <MenuItem><Link color={'black'} style={{ textDecoration: 'none' }} as={NextLink} href="/register">Register</Link></MenuItem>}
                                 {!isLoggedIn &&
-                                    <MenuItem><Link style={{ textDecoration: 'none' }} as={NextLink} href="/login">Log in</Link></MenuItem>}
+                                    <MenuItem><Link color={'black'} style={{ textDecoration: 'none' }} as={NextLink} href="/login">Log in</Link></MenuItem>}
 
-                                {isLoggedIn && <MenuItem><Link style={{ textDecoration: 'none' }}>Profile</Link></MenuItem>}
+                                {isLoggedIn && <MenuItem><Link color={'black'} style={{ textDecoration: 'none' }}>Profile</Link></MenuItem>}
                                 <MenuDivider />
-                                <MenuItem>Help</MenuItem>
-                                {isLoggedIn && <MenuItem><Link style={{ textDecoration: 'none' }} onClick={logout}>Log out</Link></MenuItem>}
+                                <MenuItem color={'black'}>Help</MenuItem>
+                                {isLoggedIn && <MenuItem><Link color={'black'} style={{ textDecoration: 'none' }} onClick={logout}>Log out</Link></MenuItem>}
 
                             </MenuList>
                         </Menu>

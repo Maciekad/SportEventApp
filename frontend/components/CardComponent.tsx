@@ -1,4 +1,4 @@
-import { Card, CardBody, Stack, Heading, Text, CardFooter, ButtonGroup, Button, HStack, Tag, TagCloseButton, TagLabel, Image } from "@chakra-ui/react";
+import { Card, CardBody, Stack, Heading, Text, CardFooter, ButtonGroup, Button, HStack, Tag, TagCloseButton, TagLabel, Image, Divider } from "@chakra-ui/react";
 import EventItem from "../model/EventItem";
 import { ReactElement, JSXElementConstructor, ReactFragment, ReactPortal, PromiseLikeOfReactNode } from "react";
 
@@ -28,7 +28,7 @@ const CardComponent = (props: CardProps) => {
                     <Text>
                         {level.description}
                     </Text>
-                    <HStack spacing={2}>
+                    {/* <HStack spacing={2}>
                         {tags.map((item: string | number | boolean | ReactElement<any, string | JSXElementConstructor<any>> | ReactFragment | ReactPortal | PromiseLikeOfReactNode | null | undefined, index) => {
                             return <Tag
                                 size="sm"
@@ -40,9 +40,11 @@ const CardComponent = (props: CardProps) => {
                                 <TagCloseButton />
                             </Tag>
                         })}
-                    </HStack>
+                    </HStack> */}
+                    
                 </Stack>
             </CardBody>
+            <Divider color={'gray.200'}/>
             <CardFooter>
                 <ButtonGroup spacing='2'>
                     <Button variant='solid' colorScheme='blue'>

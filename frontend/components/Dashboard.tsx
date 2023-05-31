@@ -72,11 +72,11 @@ const Dashboard = (
     }
 
     return (
-        <Container maxW="container.2xl" px={0}>
+        <>
             <CategorySelector onModalOpen={onOpen} isMapOpen={showMap} onMapOpen={() => setShowMap((current) => !current)} />
             <ModalComponent isOpen={isOpen} onClose={onClose} />
             {showMap ? <Map height={"700px"} zoom={10} onMapLoaded={onMapLoaded} markers={markers as Coordinates[]} center={center as Coordinates} /> : <EventsList events={events} />}
-        </Container>
+        </>
     )
 }
 
