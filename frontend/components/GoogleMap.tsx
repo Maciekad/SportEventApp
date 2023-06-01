@@ -1,19 +1,24 @@
-import { GoogleMap, MarkerF, useLoadScript } from "@react-google-maps/api";
+import { GoogleMap, Marker, MarkerF, OverlayView, OverlayViewF, useLoadScript } from "@react-google-maps/api";
 import { useMemo, useState, useEffect } from 'react';
 import { Coordinates } from '../model/Coordinates';
-import { googleMapsApiKey } from '../model/Constants';
+import { googleMapsApiKey, levels } from '../model/Constants';
+import GoogleMapReact from 'google-map-react';
+import CustomMarker from "./CustomMarker";
+import { Box, Card, Container, Flex, Grid } from "@chakra-ui/react";
+import EventCard from "./EventCard";
+import eventsList from "../lib/dataset";
+import EventItem from "../model/EventItem";
+import { getAddressFromCoordinates } from "../utils/mapUtils";
+import { AddressModel } from "../model/AddressModel";
 
 interface GoogleMapProps {
     markers: Coordinates[],
-    onMapLoaded: (coordinates: Coordinates) => void,
-    onMapClicked?: (coordinates: Coordinates) => void,
-    center: Coordinates,
-    height: string,
-    zoom: number
+    onMapLoaded: () => void,
+    onMarkerClicked: (coordinates: Coordinates) => void,
+    center: Coordinates
 }
 
 const Map = (props: GoogleMapProps) => {
-
     const { isLoaded } = useLoadScript({
         googleMapsApiKey: googleMapsApiKey as string
     });
@@ -27,31 +32,19 @@ const Map = (props: GoogleMapProps) => {
 
     }), [props.markers]);
 
-    const onMapLoaded = () => {
-        props.onMapLoaded(center);
-    };
-
-    // const onMapClicked = (ev: google.maps.MapMouseEvent) => {
-        
-    //     const lat = ev.latLng?.lat() ?? 0;
-    //     const lng = ev.latLng?.lng() ?? 0;
-
-    //     let coordinates: Coordinates = { lat: lat, lng: lng};
-
-    //     setMarkerPosition(coordinates);
-    //     props.onMapClicked(coordinates);
-    // };
+   
 
     if (!isLoaded)
         return <div>Loading...</div>
 
-    return <GoogleMap
-            zoom={props.zoom}
+    return (
+        <GoogleMap
+            zoom={10}
             center={center}
-            mapContainerStyle={{width: '100%', height: props.height}}
-            onLoad={onMapLoaded}>
-                {markerPositions?.map((mark, index) => <MarkerF key={index} position={mark} />)}
-        </GoogleMap>
+            mapContainerStyle={{ width: '100%', height: '100vh' }}
+            onLoad={props.onMapLoaded}>
+            {markerPositions?.map((mark, index) => <OverlayViewF key={index} position={mark} mapPaneName={"floatPane"}><CustomMarker position={mark} onClick={props.onMarkerClicked} /></OverlayViewF>)}
+        </GoogleMap>)
 };
 
 export default Map;

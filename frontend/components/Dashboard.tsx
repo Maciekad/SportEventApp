@@ -3,17 +3,15 @@ import { useEffect } from 'react';
 import CategorySelector from "../components/CategorySelector";
 import { useSearchParams } from 'next/navigation';
 import {
-    Container, Grid, useDisclosure, usePanGesture
+    Container, Flex, Grid, useDisclosure, usePanGesture, Text, Box
 } from "@chakra-ui/react";
 import ModalComponent from "./ModalComponent";
 import Map from "../components/GoogleMap";
 import { useState } from "react";
 import { Coordinates } from "../model/Coordinates";
-import EventsList from "./EventsList";
 import { getAddressFromCoordinates, getCoordinatesFromAddress } from "../utils/mapUtils";
-import Address from "../model/Address";
 import { googleMapsApiKey, sulkowiceCoordinates } from "../model/Constants";
-import { useJsApiLoader } from "@react-google-maps/api";
+import EventCard from "./EventCard";
 
 interface DashboardPageProps {
     events: EventItem[];
@@ -67,16 +65,33 @@ const Dashboard = (
         setMarkers(markers as Coordinates[])
     }
 
-    const onMapLoaded = async () => {
+    const onMapLoaded = () => {
+        setShowMap(true);
         setCoordinates(events);
     }
 
+    const onMarkerClick = async (coordinates: Coordinates) => {
+        const address = await getAddressFromCoordinates(coordinates);
+        const eventsTemp: any[] = props.events
+            .filter((ev: EventItem) => JSON.stringify(ev.address) === JSON.stringify(address));
+
+        setEvents(eventsTemp);
+    };
+
     return (
-        <>
-            <CategorySelector onModalOpen={onOpen} isMapOpen={showMap} onMapOpen={() => setShowMap((current) => !current)} />
+        <Container maxW={'10xl'} px={5}>
+            <CategorySelector onModalOpen={onOpen} />
             <ModalComponent isOpen={isOpen} onClose={onClose} />
-            {showMap ? <Map height={"700px"} zoom={10} onMapLoaded={onMapLoaded} markers={markers as Coordinates[]} center={center as Coordinates} /> : <EventsList events={events} />}
-        </>
+            <Grid templateColumns="1fr 3fr">
+                <Flex height={'100vh'} overflow={'scroll'} direction={'column'} alignItems={'center'} gap={5}>
+                    {events
+                        .map((ev: EventItem, index) => {
+                            return <EventCard key={index} eventItem={ev} />
+                        })}
+                </Flex>
+                <Map onMarkerClicked={onMarkerClick} onMapLoaded={onMapLoaded} markers={markers as Coordinates[]} center={center as Coordinates} />
+            </Grid>
+        </Container>
     )
 }
 

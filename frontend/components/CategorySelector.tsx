@@ -6,8 +6,6 @@ import { FaVolleyballBall, FaFutbol, FaBasketballBall, FaMap } from "react-icons
 
 interface CategorySelectorProps {
     onModalOpen: () => void;
-    onMapOpen: () => void;
-    isMapOpen: boolean;
 }
 
 const CategorySelector = (props: CategorySelectorProps) => {
@@ -44,7 +42,7 @@ const CategorySelector = (props: CategorySelectorProps) => {
     }
 
     return (
-        <Flex px={"20"} justifyContent='space-between' alignItems='center'>
+        <Flex pl={10} py={2} justifyContent='space-between' alignItems='center'>
             <Flex py={5} justifyContent="space-between">
                 {categories
                     .map((c, index) =>
@@ -61,8 +59,6 @@ const CategorySelector = (props: CategorySelectorProps) => {
                     )}
             </Flex>
             <Flex>
-                <Button p={5} size={"sm"} variant={"outline"} bgColor={"white"} mr={2} onClick={props.onMapOpen}><Text pr={1}>{props.isMapOpen ? "Hide" : "Show"} Map</Text> <FaMap/></Button>
-
                 <Button p={5} size={"sm"} variant={"outline"} bgColor={"white"} onClick={props.onModalOpen}><Text pr={1}>Filters</Text> <AiFillFilter /></Button>
             </Flex>
         </Flex>

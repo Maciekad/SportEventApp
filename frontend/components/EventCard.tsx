@@ -3,11 +3,11 @@ import EventItem from "../model/EventItem";
 import { ReactElement, JSXElementConstructor, ReactFragment, ReactPortal, PromiseLikeOfReactNode } from "react";
 
 
-interface CardProps {
+interface EventCardProps {
     eventItem: EventItem
 }
 
-const CardComponent = (props: CardProps) => {
+const EventCard = (props: EventCardProps) => {
     const { description, img, title, signedPeople, availablePlaces, level, tags } = props.eventItem;
     return (
         <Card maxW='sm'>
@@ -59,4 +59,4 @@ const CardComponent = (props: CardProps) => {
     )
 }
 
-export default CardComponent;
+export default EventCard;

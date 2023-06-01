@@ -101,7 +101,6 @@ const ModalComponent = (props: ModalComponentProps) => {
                         <Text fontSize={"xl"} fontWeight='semibold' my={4}>
                             Localization
                         </Text>
-                        <AddressForm />
                     </Box>
                     <Divider />
                 </ModalBody>

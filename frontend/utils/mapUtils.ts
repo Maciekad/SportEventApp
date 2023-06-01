@@ -1,5 +1,5 @@
 import Address from "../model/Address";
-import parseAddress from "../model/AddressModel";
+import parseAddress, { AddressModel } from "../model/AddressModel";
 import { Coordinates } from "../model/Coordinates";
 
 export const getCoordinatesFromAddress = async (address: Address): Promise<Coordinates | null> => {
@@ -32,7 +32,7 @@ export const getCoordinatesFromAddress = async (address: Address): Promise<Coord
 
 }
 
-export const getAddressFromCoordinates = async (coordinates: Coordinates): Promise<string | null> => {
+export const getAddressFromCoordinates = async (coordinates: Coordinates): Promise<AddressModel | null> => {
 
     const geocoder = new window.google.maps.Geocoder();
 
@@ -40,11 +40,7 @@ export const getAddressFromCoordinates = async (coordinates: Coordinates): Promi
         const response = await geocoder.geocode({ location: coordinates });
         if (response.results.length > 0) {
             const addressObj = parseAddress(response.results[0].formatted_address);
-
-            const newString = addressObj === null ? "Choose another adress" :
-                `${addressObj.street}, ${addressObj.postCode} ${addressObj.city}, ${addressObj.country}`;
-
-            return newString;
+            return addressObj;
         }
         else {
             console.info(`No geocoder results found for lat: ${coordinates.lat}, lng: ${coordinates.lng}.`);

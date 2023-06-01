@@ -1,7 +1,7 @@
-import Event from "../model/event";
-import { levels } from "../model/constants";
+import { levels } from "../model/Constants";
+import EventItem from "../model/EventItem";
 
-const eventsList: Event[] = [
+const eventsList: EventItem[] = [
   {
     id: 1,
     title: "Gra w siatkówkę",
@@ -47,7 +47,7 @@ const eventsList: Event[] = [
     level: levels.recreational,
     tags: ['basket', 'nba', 'sea', 'baltic', 'noFilter'],
     address: {
-      street: 'Włodarzewska 55',
+      street: '',
       city: 'Warszawa',
       postCode: '02-384',
       country: 'Poland'
@@ -81,25 +81,8 @@ const eventsList: Event[] = [
     level: levels.recreational,
     tags: ['bikeTrip', 'calvariaHills', 'coffe', 'fitDay'],
     address: {
-      street: 'Jeżynowa 8',
+      street: 'Jezynowa 8',
       city: 'Sułkowice',
-      postCode: '05-650',
-      country: 'Poland'
-    }
-  },
-  {
-    id: 6,
-    title: "Gramy w haluwke",
-    description:
-      "Gramy w pilke nozna na hali na Chynowie",
-    availablePlaces: 10,
-    signedPeople: 5,
-    img: "/img/football.jpg",
-    level: levels.recreational,
-    tags: ['bikeTrip', 'calvariaHills', 'coffe', 'fitDay'],
-    address: {
-      street: 'Szkolna 1',
-      city: 'Chynów',
       postCode: '05-650',
       country: 'Poland'
     }
