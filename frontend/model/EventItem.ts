@@ -1,5 +1,6 @@
 import { AddressModel } from "./AddressModel";
 import { Coordinates } from "./Coordinates";
+import EventAttendee from "./EventAttendee";
 import { Level } from "./Level";
 
 interface EventItem {
@@ -15,6 +16,7 @@ interface EventItem {
     tags: string[];
     address: AddressModel;
     coordinates: Coordinates;
+    attendees: EventAttendee[];
 }
 
 export default EventItem;

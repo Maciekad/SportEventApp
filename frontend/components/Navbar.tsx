@@ -53,6 +53,8 @@ export default function Navbar() {
                     />
                     <HStack spacing={8} alignItems={'center'}>
                         <Box><Link fontWeight={"semibold"} fontSize={'xl'} style={{ textDecoration: 'none' }} as={NextLink} href="/">SportEventHub</Link></Box>
+                        <Box><Link style={{ textDecoration: 'none' }} as={NextLink} href="/dashboard">Events</Link></Box>
+                        <Box><Link style={{ textDecoration: 'none' }} as={NextLink} href="/dashboard">Help</Link></Box>
                     </HStack>
                     <Flex alignItems={'center'}>
                         <Menu>

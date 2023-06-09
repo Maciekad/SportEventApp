@@ -45,7 +45,9 @@ const schema = gql`
 
   type EventAttendee {
     id: ID!,
-    email: String
+    email: String,
+    firstName: String,
+    lastName: String
   }
 
   type Address {
@@ -67,7 +69,9 @@ const schema = gql`
 
   input AttendeeInput {
     id: Int!, 
-    email: String!
+    email: String!,
+    firstName: String,
+    lastName: String
   }
   
 `;

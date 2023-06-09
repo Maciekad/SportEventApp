@@ -7,7 +7,7 @@ export interface IAuth {
     logout: () => void;
     login: (login: Login) => Promise<void>;
     isLoggedIn: boolean,
-    currentUser: User | undefined;
+    currentUser: User;
 }
 
 type Props = {

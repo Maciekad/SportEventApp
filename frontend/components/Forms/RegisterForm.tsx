@@ -15,6 +15,7 @@ import { User } from '../../model/User';
 import { registerUser } from "../../service/AuthService";
 
 type FormData = {
+    id: number;
     email: string;
     firstName: string;
     lastName: string;

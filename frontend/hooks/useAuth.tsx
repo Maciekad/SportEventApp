@@ -3,11 +3,13 @@ import { IAuth } from "../lib/auth";
 import Login from "../model/Login";
 import { signIn } from "../service/AuthService";
 import { User } from "../model/User";
+import { useToast } from "@chakra-ui/react";
 
 export const useProvideAuth = (): IAuth => {
     const [authToken, setAuthToken] = useState(null);
     const [currentUser, setCurrentUser] = useState<User | undefined>();
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const toast = useToast()
 
     useEffect(() => {
         console.log("Hello from use Auth");
@@ -26,6 +28,13 @@ export const useProvideAuth = (): IAuth => {
         setIsLoggedIn(false);
         setCurrentUser(undefined);
         setAuthToken(null)
+
+        toast({
+            title: 'Success.',
+            description: "You were succesfully logged out.",
+            status: 'success',
+            duration: 3000
+        })
     }
 
 
@@ -35,6 +44,13 @@ export const useProvideAuth = (): IAuth => {
         localStorage.setItem("user", JSON.stringify(result?.login?.user))
         setCurrentUser(result?.login?.user)
         setIsLoggedIn(true);
+
+        toast({
+            title: 'Success.',
+            description: "You were succesfully logged in.",
+            status: 'success',
+            duration: 3000
+        })
     }
 
     return { login, logout, isLoggedIn, currentUser }

@@ -27,8 +27,6 @@ const LoginForm = () => {
 
     const { login } = useAuth() as IAuth;
 
-    const [message, setMessage] = useState('')
-
     const {
         handleSubmit,
         register,
@@ -36,7 +34,6 @@ const LoginForm = () => {
     } = useForm<FormData>()
 
     const onSubmit = async (value: Login) => {
-        console.log(value);
         try {
             await login(value);
             router.push('/');

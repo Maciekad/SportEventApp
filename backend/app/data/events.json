@@ -2,7 +2,7 @@
   {
     "id": 1,
     "title": "Gra w siatkówkę",
-    "description": "Gramy w siatkówkę na Chynowie.",
+    "description": "Dzień doberek! Gramy w siatkówkę na Chynowie o godzinie 16:00. Kto chętny proszę o sms do godziny 17:00",
     "category": "Volleyball",
     "gender": "Mix",
     "availablePlaces": 12,
@@ -25,7 +25,15 @@
     "attendees": [
       {
         "id": 2,
-        "email": "agaSava@gmail.com"
+        "email": "agaSava@gmail.com",
+        "firstName": "Agata",
+        "lastName": "Sawicka"
+      },
+      {
+        "id": 1,
+        "email": "m.kowal@gmail.com",
+        "firstName": "Maciej",
+        "lastName": "Kowal"
       }
     ]
   },
@@ -55,11 +63,9 @@
     "attendees": [
       {
         "id": 1,
-        "email": "a@gmail.com"
-      },
-      {
-        "id": 2,
-        "email": "agaSava@gmail.com"
+        "email": "a@gmail.com",
+        "firstName": "adam",
+        "lastName": "adamek"
       }
     ]
   },

@@ -1,5 +1,6 @@
 import request, { gql, GraphQLClient } from "graphql-request";
 import EventItem from "../model/EventItem";
+import EventAttendee from "../model/EventAttendee";
 
 interface GetEventsListResponse {
   getAllEvents: EventItem[];
@@ -7,6 +8,10 @@ interface GetEventsListResponse {
 
 interface GetEventResponse {
   getEvent: EventItem;
+}
+
+interface AddEventAttendeeResponsee {
+  addEventAttendee: EventItem;
 }
 
 const event = gql`
@@ -33,6 +38,12 @@ const event = gql`
     lat
     lng
   }
+  attendees {
+    id
+    email
+    firstName
+    lastName
+  }
   `
 
 const getAllEventsQuery = gql`
@@ -52,6 +63,14 @@ const getEventQuery = gql`
     } 
   `;
 
+
+
+const addEventAttendeeMutation = gql`mutation addEventAttendee($eventId: Int!, $attendee: AttendeeInput) {
+  addEventAttendee(eventId: $eventId, attendee: $attendee) {
+    ${event}
+  }
+}`;
+
 export const graphQLClient = new GraphQLClient(`${process.env.GRAPHQL_URL}`)
 
 export const getEventsList = async (): Promise<EventItem[]> => {
@@ -62,4 +81,9 @@ export const getEventsList = async (): Promise<EventItem[]> => {
 export const getEventById = async (id: string): Promise<EventItem> => {
   const result = await graphQLClient.request<GetEventResponse>(getEventQuery, { getEventId: Number(id) });
   return result.getEvent;
+}
+
+export const addEventAttendee = async (id: number, attendee: EventAttendee): Promise<EventItem> => {
+  const result = await graphQLClient.request<AddEventAttendeeResponsee>(addEventAttendeeMutation, { eventId: id, attendee })
+  return result.addEventAttendee;
 }
