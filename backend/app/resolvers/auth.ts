@@ -4,10 +4,10 @@ import { registerUser, login } from "../services/authService";
 
 const authResolver = {
     Mutation: {
-        async registerUser(parent: any, args: RegisterRequest) {
+        registerUser: async (parent: any, args: RegisterRequest) => {
             return await registerUser(args);
         },
-        async login(parent: any, args: LoginRequest) {
+        login: async (parent: any, args: LoginRequest) => {
             return await login(args);
         }
     },

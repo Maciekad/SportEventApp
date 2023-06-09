@@ -1,5 +1,3 @@
-import { useState } from "react"
-import { IAuth, useAuth } from "../lib/auth"
 import { NextPage } from "next"
 import LoginForm from "../components/Forms/LoginForm"
 import { Container } from "@chakra-ui/layout"

@@ -1,4 +1,4 @@
-import { Box, Flex, Text, Button } from "@chakra-ui/react";
+import { Image, Flex, Text, Button } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { AiFillFilter } from "react-icons/ai";
 import { BiTennisBall, BiCycling } from "react-icons/bi";
@@ -13,19 +13,19 @@ const CategorySelector = (props: CategorySelectorProps) => {
 
     const categories = [{
         name: "Football",
-        icon: <FaFutbol size={20} />
+        icon: <Image boxSize={'25px'} src='/img/icons/football.png' alt='footballIcon' />
     },
     {
         name: "Volleyball",
-        icon: <FaVolleyballBall size={20} />
+        icon: <Image boxSize={'25px'} src='/img/icons/volleyball.png' alt='volleyballIcon' />
     },
     {
         name: "Basketball",
-        icon: <FaBasketballBall size={20} />
+        icon: <Image boxSize={'25px'} src='/img/icons/basketball.png' alt='basketballIcon' />
     },
     {
         name: "Tennis",
-        icon: <BiTennisBall size={20} />
+        icon: <Image boxSize={'25px'} src='/img/icons/tennis.png' alt='tennisIcon' />
     },
     {
         name: "Cycling",
@@ -51,15 +51,16 @@ const CategorySelector = (props: CategorySelectorProps) => {
                             p={5}
                             backgroundColor='white'
                             variant={"outline"}
-                            size={"sm"}
+                            _hover={{backgroundColor: '#ffc864', borderColor: '#ffc864'}}
+                            size={"lg"}
                             mr={3}>
                             <Flex alignItems='center'>{c.icon}
-                                <Text pl={2} fontWeight={'semibold'}>{c.name}</Text></Flex>
+                                <Text fontSize={'sm'} pl={2}>{c.name}</Text></Flex>
                         </Button>
                     )}
             </Flex>
             <Flex>
-                <Button p={5} size={"sm"} variant={"outline"} bgColor={"white"} onClick={props.onModalOpen}><Text pr={1}>Filters</Text> <AiFillFilter /></Button>
+                <Button p={5} size={"lg"} variant={"outline"} bgColor={"white"} onClick={props.onModalOpen}><Text fontSize={'sm'} pr={1}>Filters</Text> <AiFillFilter /></Button>
             </Flex>
         </Flex>
     );

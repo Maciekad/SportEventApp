@@ -1,0 +1,166 @@
+[
+  {
+    "id": 1,
+    "title": "Gra w siatkówkę",
+    "description": "Gramy w siatkówkę na Chynowie.",
+    "category": "Volleyball",
+    "gender": "Mix",
+    "availablePlaces": 12,
+    "signedPeople": 5,
+    "img": "/img/volleyball.jpg",
+    "level": {
+      "num": 1,
+      "description": "Beginner"
+    },
+    "address": {
+      "street": "Szkolna 1",
+      "city": "Chynów",
+      "postCode": "05-650",
+      "country": "Poland"
+    },
+    "coordinates": {
+      "lat": 51.9058254,
+      "lng": 21.0813898
+    },
+    "attendees": [
+      {
+        "id": 2,
+        "email": "agaSava@gmail.com"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "title": "Gramy w piłkę",
+    "availablePlaces": 12,
+    "signedPeople": 12,
+    "description": "Gramy w piłkę w Warszawie.",
+    "category": "Football",
+    "gender": "Male",
+    "img": "/img/football.jpg",
+    "level": {
+      "num": 2,
+      "description": "Advanced"
+    },
+    "address": {
+      "street": "Polki 3C",
+      "city": "Warszawa",
+      "postCode": "02-826",
+      "country": "Poland"
+    },
+    "coordinates": {
+      "lat": 52.1508676,
+      "lng": 21.0033682
+    },
+    "attendees": [
+      {
+        "id": 1,
+        "email": "a@gmail.com"
+      },
+      {
+        "id": 2,
+        "email": "agaSava@gmail.com"
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "title": "Gra w koszykówkę",
+    "description": "Gramy w kosza w parku Szczesliwickim.",
+    "category": "Basketball",
+    "gender": "Male",
+    "availablePlaces": 12,
+    "signedPeople": 5,
+    "img": "/img/basketball.jpg",
+    "level": {
+      "num": 5,
+      "description": "Recreational"
+    },
+    "address": {
+      "street": "Włodarzewska 55",
+      "city": "Warszawa",
+      "postCode": "02-384",
+      "country": "Poland"
+    },
+    "coordinates": {
+      "lat": 52.2018142,
+      "lng": 20.9569082
+    },
+    "attendees": []
+  },
+  {
+    "id": 4,
+    "title": "Gra w tenisa",
+    "description": "Gramy w tenisa na Ursynowie.",
+    "category": "Tennis",
+    "gender": "Mix",
+    "availablePlaces": 2,
+    "signedPeople": 2,
+    "img": "/img/tennis.jpg",
+    "level": {
+      "num": 2,
+      "description": "Semi-advanced"
+    },
+    "address": {
+      "street": "Ludwika Hirszfelda 1",
+      "city": "Warszawa",
+      "postCode": "02-776",
+      "country": "Poland"
+    },
+    "coordinates": {
+      "lat": 52.1423506,
+      "lng": 21.0411211
+    },
+    "attendees": []
+  },
+  {
+    "id": 5,
+    "title": "Jazda na rowerach",
+    "description": "Jedziemy na wycieczkę rowerową do Góry Kalwarii.",
+    "category": "Cycling",
+    "gender": "Mix",
+    "availablePlaces": 5,
+    "signedPeople": 5,
+    "img": "/img/cycling.jpg",
+    "level": {
+      "num": 3,
+      "description": "Advanced"
+    },
+    "address": {
+      "street": "Jeżynowa 8",
+      "city": "Sułkowice",
+      "postCode": "05-650",
+      "country": "Poland"
+    },
+    "coordinates": {
+      "lat": 51.9328233,
+      "lng": 21.1027308
+    },
+    "attendees": []
+  },
+  {
+    "id": 6,
+    "title": "Gramy w haluwke",
+    "description": "Gramy w pilke nozna na hali na Chynowie",
+    "category": "Football",
+    "gender": "Female",
+    "availablePlaces": 10,
+    "signedPeople": 5,
+    "img": "/img/football.jpg",
+    "level": {
+      "num": 2,
+      "description": "Beginner"
+    },
+    "address": {
+      "street": "Szkolna 1",
+      "city": "Chynów",
+      "postCode": "05-650",
+      "country": "Poland"
+    },
+    "coordinates": {
+      "lat": 51.9058254,
+      "lng": 21.0813898
+    },
+    "attendees": []
+  }
+]

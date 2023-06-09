@@ -3,15 +3,15 @@ import { gql } from "apollo-server-express";
 const schema = gql`
   type Query {
     getAllEvents: [Event]
-    getAllBookings: [Event]
     getEvent(id: Int): Event
-    getUserById(id: Int): User
+    getUser(id: Int): User
     getAllUsers: [User]
   }
 
   type Mutation {
     registerUser(firstName: String!, lastName: String!, email: String!, password: String!): AuthPayload!
     login(email: String!, password: String!): AuthPayload!
+    addEventAttendee(eventId: Int!, attendee: AttendeeInput): Event
   }
 
   type User {
@@ -31,12 +31,21 @@ const schema = gql`
     id: ID!,
     title: String,
     description: String,
+    category: String,
+    gender: String,
     img: String,
     availablePlaces: String,
     signedPeople: Int,
     level: Level,
     tags: [String],
-    address: Address
+    address: Address,
+    coordinates: Coordinates
+    attendees: [EventAttendee]
+  }
+
+  type EventAttendee {
+    id: ID!,
+    email: String
   }
 
   type Address {
@@ -46,9 +55,19 @@ const schema = gql`
     country: String
   }
 
+  type Coordinates {
+    lat: Float,
+    lng: Float
+  }
+
   type Level {
     num: Int,
     description: String
+  }
+
+  input AttendeeInput {
+    id: Int!, 
+    email: String!
   }
   
 `;

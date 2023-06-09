@@ -1,5 +1,6 @@
 import * as fs from "fs";
 import * as util from "util";
+import Event from "../model/event";
 
 const readFileAsync = util.promisify(fs.readFile);
 const writeFileAsync = util.promisify(fs.writeFile);
@@ -25,6 +26,25 @@ export const writeJsonFile = async (path: string, jsonData: any): Promise<void> 
         console.log('JSON file written successfully.');
     } catch (error) {
         console.error('Error writing JSON file:', error);
+        throw error;
+    }
+}
+
+
+export const updateJsonFile = async (path: string, jsonData: any): Promise<void> => {
+    try {
+        const currentData = await readJsonFile(path);
+
+        const concatedData = currentData.concat(jsonData)
+
+        // Get unique values from array by ID
+        const updatedData = [...new Map(concatedData.map((item: Event) => [item.id, item])).values()];
+
+        const data = JSON.stringify(updatedData, null, 2);
+        await writeFileAsync(path, data, 'utf8')
+        console.log('JSON file updated successfully.');
+    } catch (error) {
+        console.error('Error updating JSON file:', error);
         throw error;
     }
 }

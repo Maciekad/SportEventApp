@@ -42,7 +42,7 @@ export default function Navbar() {
 
     return (
         <>
-            <Box bgColor={"green.500"} color={"white"} borderBottom={"1px"} borderColor={"gray.200"} px={12}>
+            <Box bgColor={"green.500"} color={"white"} borderBottom={"1px"} borderColor={"gray.200"} px={12} py={1}>
                 <Flex h={16} alignItems={'center'} justifyContent={'space-between'} px={12}>
                     <IconButton
                         size={'md'}
@@ -52,13 +52,13 @@ export default function Navbar() {
                         onClick={isOpen ? onClose : onOpen}
                     />
                     <HStack spacing={8} alignItems={'center'}>
-                        <Box><Link fontWeight={"semibold"} fontSize={'lg'} style={{ textDecoration: 'none' }} as={NextLink} href="/">SportEvents</Link></Box>
+                        <Box><Link fontWeight={"semibold"} fontSize={'xl'} style={{ textDecoration: 'none' }} as={NextLink} href="/">SportEventHub</Link></Box>
                     </HStack>
                     <Flex alignItems={'center'}>
                         <Menu>
-                            <Button p={4} _hover={{ border: '1px', bgColor: "green.400" }} size={"sm"} variant={"outline"}>Create your event</Button>
-                            <Text pr={2}>{currentUser?.email}</Text>
+                            <Button p={3} _hover={{ border: '1px', bgColor: "green.400" }} size={"xl"} variant={"outline"}><Text fontSize={'md'}>Create your event</Text></Button>
                             <MenuButton
+                                pl={3}
                                 as={Button}
                                 rounded={'full'}
                                 variant={'link'}
@@ -66,12 +66,10 @@ export default function Navbar() {
                                 minW={0}>
                                 <Avatar
                                     size={'sm'}
-                                    src={
-                                        'https://images.unsplash.com/photo-1493666438817-866a91353ca9?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=b616b2c5b373a80ffc9636ba24f7a4a9'
-                                    }
+                                    name={currentUser && `${currentUser?.firstName} ${currentUser?.lastName}`}
                                 />
                             </MenuButton>
-                            <MenuList>
+                            <MenuList zIndex={3}>
                                 {!isLoggedIn && <MenuItem><Link color={'black'} style={{ textDecoration: 'none' }} as={NextLink} href="/register">Register</Link></MenuItem>}
                                 {!isLoggedIn &&
                                     <MenuItem><Link color={'black'} style={{ textDecoration: 'none' }} as={NextLink} href="/login">Log in</Link></MenuItem>}

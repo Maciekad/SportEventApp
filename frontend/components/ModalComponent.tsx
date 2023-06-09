@@ -1,4 +1,4 @@
-import { Modal, ModalOverlay, ModalContent, ModalHeader, Divider, ModalCloseButton, ModalBody, Grid, CheckboxGroup, Text, Stack, Checkbox, ModalFooter, Button, Box, Slider, SliderMark, SliderFilledTrack, SliderThumb, SliderTrack } from "@chakra-ui/react";
+import { Modal, Image, ModalOverlay, ModalContent, ModalHeader, Divider, ModalCloseButton, ModalBody, Grid, CheckboxGroup, Text, Stack, Checkbox, ModalFooter, Button, Box, Slider, SliderMark, SliderFilledTrack, SliderThumb, SliderTrack } from "@chakra-ui/react";
 import { BiTennisBall } from "react-icons/bi";
 import { FaVolleyballBall, FaFutbol, FaBasketballBall } from "react-icons/fa";
 import AddressForm from "./Forms/AddressForm";
@@ -33,28 +33,28 @@ const ModalComponent = (props: ModalComponentProps) => {
                                 border: '2px',
                                 bg: '#F7F7F7'
                             }} border='2px' borderRadius={10} borderColor='gray.200' p={4}>
-                                <FaVolleyballBall size={25} />
+                                <Image boxSize={'25px'} src='/img/icons/volleyball.png' alt='volleyballIcon' />
                                 <Text align={'start'} pt={8} fontWeight={'semibold'}>Volleyball</Text>
                             </Box>
                             <Box as="button" _hover={{ border: '2px' }} _focus={{
                                 border: '2px',
                                 bg: '#F7F7F7'
                             }} border='2px' borderRadius={10} borderColor='gray.200' p={4}>
-                                <FaFutbol size={25} />
+                                <Image boxSize={'25px'} src='/img/icons/football.png' alt='footballIcon' />
                                 <Text align={'start'} pt={8} fontWeight={'semibold'}>Football</Text>
                             </Box>
                             <Box as="button" _hover={{ border: '2px' }} _focus={{
                                 border: '2px',
                                 bg: '#F7F7F7'
                             }} border='2px' borderRadius={10} borderColor='gray.200' p={4}>
-                                <FaBasketballBall size={25} />
+                                <Image boxSize={'25px'} src='/img/icons/basketball.png' alt='basketballIcon' />
                                 <Text align={'start'} pt={8} fontWeight={'semibold'}>Basketball</Text>
                             </Box>
                             <Box as="button" _hover={{ border: '2px' }} _focus={{
                                 border: '2px',
                                 bg: '#F7F7F7'
                             }} border='2px' borderRadius={10} borderColor='gray.200' p={4}>
-                                <BiTennisBall size={25} />
+                                <Image boxSize={'25px'} src='/img/icons/tennis.png' alt='tennisIcon' />
                                 <Text align={'start'} pt={8} fontWeight={'semibold'}>Tenis</Text>
                             </Box>
                         </Grid>

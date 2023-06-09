@@ -1,38 +1,21 @@
-import { GoogleMap, Marker, MarkerF, OverlayView, OverlayViewF, useLoadScript } from "@react-google-maps/api";
-import { useMemo, useState, useEffect } from 'react';
+import { GoogleMap, OverlayViewF, useLoadScript } from "@react-google-maps/api";
+import { useState } from 'react';
 import { Coordinates } from '../model/Coordinates';
-import { googleMapsApiKey, levels } from '../model/Constants';
-import GoogleMapReact from 'google-map-react';
+import { googleMapsApiKey, sulkowiceCoordinates } from '../model/Constants';
 import CustomMarker from "./CustomMarker";
-import { Box, Card, Container, Flex, Grid } from "@chakra-ui/react";
-import EventCard from "./EventCard";
-import eventsList from "../lib/dataset";
 import EventItem from "../model/EventItem";
-import { getAddressFromCoordinates } from "../utils/mapUtils";
-import { AddressModel } from "../model/AddressModel";
 
 interface GoogleMapProps {
-    markers: Coordinates[],
-    onMapLoaded: () => void,
-    onMarkerClicked: (coordinates: Coordinates) => void,
-    center: Coordinates
+    eventItems: EventItem[]
 }
 
 const Map = (props: GoogleMapProps) => {
+
+    const [center, setCenter] = useState<Coordinates>(sulkowiceCoordinates);
+
     const { isLoaded } = useLoadScript({
         googleMapsApiKey: googleMapsApiKey as string
     });
-
-    const center = useMemo<Coordinates>(() => (props.center), [props.center]);
-
-    const [markerPositions, setMarkerPositions] = useState<Coordinates[]>(props.markers);
-
-    useEffect((() => {
-        props.markers && setMarkerPositions(props.markers);
-
-    }), [props.markers]);
-
-   
 
     if (!isLoaded)
         return <div>Loading...</div>
@@ -41,9 +24,8 @@ const Map = (props: GoogleMapProps) => {
         <GoogleMap
             zoom={10}
             center={center}
-            mapContainerStyle={{ width: '100%', height: '100vh' }}
-            onLoad={props.onMapLoaded}>
-            {markerPositions?.map((mark, index) => <OverlayViewF key={index} position={mark} mapPaneName={"floatPane"}><CustomMarker position={mark} onClick={props.onMarkerClicked} /></OverlayViewF>)}
+            mapContainerStyle={{ width: '100%', height: '100vh' }}>
+            {props.eventItems?.map((event, index) => <OverlayViewF key={index} position={event.coordinates} mapPaneName={"floatPane"}><CustomMarker eventItem={event}/></OverlayViewF>)}
         </GoogleMap>)
 };
 

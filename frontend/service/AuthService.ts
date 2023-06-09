@@ -3,8 +3,6 @@ import AuthPayload from '../model/AuthPayload';
 import Login from '../model/Login';
 import { User } from '../model/User';
 
-const endpoint = `http://localhost:8000/graphql`
-
 const loginMutation = gql`mutation Login($email: String!, $password: String!) {
     login(email: $email, password: $password) {
       token
@@ -30,7 +28,7 @@ const registerMutation = gql`mutation RegisterUser($firstName: String!, $lastNam
     }
   }`
 
-export const graphQLClient = new GraphQLClient(endpoint)
+export const graphQLClient = new GraphQLClient(`${process.env.GRAPHQL_URL}`)
 
 export const signIn = async (login: Login): Promise<any> => {
     try {
