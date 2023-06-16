@@ -7,6 +7,7 @@ interface EventItem {
     id: number,
     title: string,
     description: string,
+    price: string,
     category: string,
     gender: string,
     img: string,

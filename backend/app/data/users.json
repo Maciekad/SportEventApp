@@ -19,5 +19,12 @@
     "lastName": "Rybacka",
     "password": "$2a$10$4sTLtrpKtxK93.bWnn8hV.iE5ogWva6CT2Q4A12rmNeX./2DoUMiK",
     "email": "m.ryba@gmail.com"
+  },
+  {
+    "id": 86,
+    "firstName": "Maciej",
+    "lastName": "Ader",
+    "password": "$2a$10$.AWfSQ4KI1uuKs3fbULo6OFcjCGCkA5ptcYaHX3lAbzxsVjilHcXW",
+    "email": "m.adrych@gmail.com"
   }
 ]

@@ -1,15 +1,11 @@
 import { Modal, Image, ModalOverlay, ModalContent, ModalHeader, Divider, ModalCloseButton, ModalBody, Grid, CheckboxGroup, Text, Stack, Checkbox, ModalFooter, Button, Box, Slider, SliderMark, SliderFilledTrack, SliderThumb, SliderTrack } from "@chakra-ui/react";
-import { BiTennisBall } from "react-icons/bi";
-import { FaVolleyballBall, FaFutbol, FaBasketballBall } from "react-icons/fa";
-import AddressForm from "./Forms/AddressForm";
-import { useState } from "react";
 
 interface ModalComponentProps {
     onClose: () => void,
     isOpen: boolean
 }
 
-const ModalComponent = (props: ModalComponentProps) => {
+const FiltersModal = (props: ModalComponentProps) => {
     const { isOpen, onClose } = props;
 
     const labelStyles = {
@@ -96,17 +92,10 @@ const ModalComponent = (props: ModalComponentProps) => {
                             </Stack>
                         </CheckboxGroup>
                     </Box>
-                    <Divider />
-                    <Box my={5}>
-                        <Text fontSize={"xl"} fontWeight='semibold' my={4}>
-                            Localization
-                        </Text>
-                    </Box>
-                    <Divider />
                 </ModalBody>
 
                 <ModalFooter>
-                    <Button colorScheme='blue' mr={3} onClick={onClose}>
+                    <Button colorScheme='green' mr={3} onClick={onClose}>
                         Show results
                     </Button>
                     <Button variant='ghost'>Cancel</Button>
@@ -116,4 +105,4 @@ const ModalComponent = (props: ModalComponentProps) => {
     );
 }
 
-export default ModalComponent;
+export default FiltersModal;

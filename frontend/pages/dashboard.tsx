@@ -1,132 +1,98 @@
 import { NextPage, InferGetServerSidePropsType, GetServerSideProps } from "next";
 import { getEventsList } from "../service/EventsService";
-import { useDisclosure, Container, Grid, Flex, Text, Card, Heading, CardBody, Box, Checkbox, CheckboxGroup, Stack, Breadcrumb, BreadcrumbItem, BreadcrumbLink } from "@chakra-ui/react";
-import { useSearchParams } from "next/navigation";
+import { useDisclosure, Container, Grid, Flex, Text, Card, Heading, CardBody, Box, Checkbox, CheckboxGroup, Stack, Breadcrumb, BreadcrumbItem, BreadcrumbLink, Button, Select, HStack } from "@chakra-ui/react";
+import { useSearchParams, useParams } from "next/navigation";
 import { useState, useEffect } from "react";
 import EventCard from "../components/EventCard";
-import ModalComponent from "../components/ModalComponent";
+import ModalComponent from "../components/Modals/FiltersModal";
 import EventItem from "../model/EventItem";
-import Map from "../components/GoogleMap";
+import MapComponent from "../components/Maps/GoogleMap";
+import Filters, { FilterSections, categories } from "../components/Filters";
+import { FaMap } from "react-icons/fa";
+import { AiFillFilter } from "react-icons/ai";
+import { useRouter } from "next/router";
+import { ParsedUrlQuery } from "querystring";
+import FiltersModal from "../components/Modals/FiltersModal";
+import MapModal from "../components/Modals/MapModal";
+
+export interface EventPageQuery extends ParsedUrlQuery {
+    search?: string,
+    category?: string,
+    level?: string,
+    gender?: string
+}
 
 const Dashboard: NextPage = ({
-    result,
+    eventsList,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) => {
 
-    const [events, setEvents] = useState<EventItem[]>(result);
-    const [filter, setFilter] = useState('');
-
+    const [events, setEvents] = useState<EventItem[]>(eventsList);
+    const [isMapShown, setIsMapShown] = useState<boolean>(false);
     const { isOpen, onOpen, onClose } = useDisclosure();
-    const searchParams = useSearchParams();
+
+    const router = useRouter();
 
     useEffect(() => {
-        const search = searchParams.get('search');
-        search ? setFilter(search) : setFilter('');
-    }, [searchParams]);
+        const { search } = router.query as EventPageQuery;
+        if (search) {
+            const eventsTemp: any[] = eventsList
+                .filter((ev: any) => filterEvent(ev, search));
 
-    useEffect(() => {
-        const eventsTemp: any[] = result
-            .filter((ev: any) => filterEvent(ev));
+            setEvents(eventsTemp);
 
-        setEvents(eventsTemp);
+            return;
+        }
 
-    }, [filter]);
+        setEvents(eventsList);
 
-    const filterEvent = (ev: EventItem): boolean => {
+    }, [router.query]);
 
-        if (ev.title.toLowerCase().includes(filter.toLowerCase()))
+    const filterEvent = (ev: EventItem, searchFilter: String): boolean => {
+
+        if (ev.title.toLowerCase().includes(searchFilter.toLowerCase()))
             return true;
 
-        if (ev.description.toLowerCase().includes(filter.toLowerCase()))
+        if (ev.description.toLowerCase().includes(searchFilter.toLowerCase()))
             return true;
 
-        if (ev.tags.some(tag => tag.toLowerCase().includes(filter.toLowerCase())))
+        if (ev.category.toLowerCase().includes(searchFilter.toLowerCase()))
+            return true;
+
+        if (ev.level.description.toLowerCase().includes(searchFilter.toLowerCase()))
             return true;
 
         return false;
     }
 
-
     return (
-        <Container maxW={'10xl'} px={5} py={5}>
-            {/* <CategorySelector onModalOpen={onOpen} /> */}
-            {/* <Flex px={10} py={5}>
-                <Breadcrumb spacing='8px' separator={<MdKeyboardArrowRight color='gray.500' />}>
-                    <BreadcrumbItem>
-                        <BreadcrumbLink href='/'><Text fontSize={"md"}>Home</Text></BreadcrumbLink>
-                    </BreadcrumbItem>
+        <Box p={10}>
+            <FiltersModal isOpen={isOpen} onClose={onClose} />
+            <MapModal events={events} isOpen={isMapShown} onClose={() => setIsMapShown(false)} />
+            <Flex pb={10} justifyContent={'space-between'}>
+                <Heading size={'lg'}>Events</Heading>
+                <HStack gap={1}>
+                    <Button bgColor={'white'} onClick={onOpen}><AiFillFilter /><Text pl={2}>Filters</Text> </Button>
+                    <Button bgColor={'white'} onClick={() => setIsMapShown((current) => !current)}><FaMap />
+                        {isMapShown ? <Text pl={2}>Hide Map</Text> : <Text pl={2}>Show Map</Text>}
+                    </Button>
+                </HStack>
+            </Flex>
+            <Grid gap={5} gridTemplateColumns={'1fr 1fr 1fr 1fr'}>
+                {events
+                    .map((ev: EventItem, index) => {
+                        return <EventCard key={index} eventItem={ev} />
+                    })}
 
-                    <BreadcrumbItem>
-                        <BreadcrumbLink href='/'><Text fontSize={"md"}>Dashboard</Text></BreadcrumbLink>
-                    </BreadcrumbItem>
-
-                </Breadcrumb>
-            </Flex> */}
-            <ModalComponent isOpen={isOpen} onClose={onClose} />
-            <Grid templateColumns="1fr 4fr 2fr">
-                <Flex height={'100vh'} overflow={'scroll'} direction={'column'}>
-                    <Card>
-                        <CardBody>
-                            <Heading size={"md"}>Filter by the following criteria</Heading>
-                            <Box my={5}>
-                                <Text fontWeight='semibold' my={4}>
-                                    Sport
-                                </Text>
-                                <CheckboxGroup colorScheme='green' defaultValue={['mix']}>
-                                    <Stack  spacing={[1, 2]}>
-                                        <Checkbox size={'md'} value='naruto'><Text >Football</Text></Checkbox>
-                                        <Checkbox value='sasuke'>Volleyball</Checkbox>
-                                        <Checkbox value='kakashi'>Basketball</Checkbox>
-                                        <Checkbox value='kakashi'>Tennis</Checkbox>
-                                        <Checkbox value='kakashi'>Cycling</Checkbox>
-                                    </Stack>
-                                </CheckboxGroup>
-                            </Box>
-                            <Box my={5}>
-                                <Text fontWeight='semibold' my={4}>
-                                    Level
-                                </Text>
-                                <CheckboxGroup colorScheme='green' defaultValue={['mix']}>
-                                    <Stack spacing={[1, 2]}>
-                                        <Checkbox value='naruto'>Advanced</Checkbox>
-                                        <Checkbox value='sasuke'>Semi-advanced</Checkbox>
-                                        <Checkbox value='kakashi'>Beginner</Checkbox>
-                                        <Checkbox value='kakashi'>Recreational</Checkbox>
-                                    </Stack>
-                                </CheckboxGroup>
-                            </Box>
-                            <Box my={5}>
-                                <Text fontWeight='semibold' my={4}>
-                                    Gender
-                                </Text>
-                                <CheckboxGroup colorScheme='green' defaultValue={['mix']}>
-                                    <Stack spacing={[1, 2]}>
-                                        <Checkbox value='naruto'>Male</Checkbox>
-                                        <Checkbox value='sasuke'>Female</Checkbox>
-                                        <Checkbox value='kakashi'>Mix</Checkbox>
-                                    </Stack>
-                                </CheckboxGroup>
-                            </Box>
-                        </CardBody>
-                    </Card>
-                </Flex>
-
-                <Map eventItems={result} />
-                <Flex px={5} gap={5} height={'100vh'} overflow={'scroll'} direction={'column'}>
-                    {events
-                        .map((ev: EventItem, index) => {
-                            return <EventCard key={index} eventItem={ev} />
-                        })}
-                </Flex>
             </Grid>
-        </Container>
+        </Box>
     )
 }
 
 export const getServerSideProps: GetServerSideProps = async () => {
-    const result = await getEventsList();
+    const eventsList = await getEventsList();
     return {
         props: {
-            result,
+            eventsList,
         },
     };
 };

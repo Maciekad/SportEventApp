@@ -3,9 +3,7 @@ import {
     Box,
     Flex,
     Avatar,
-    HStack,
     Link,
-    IconButton,
     Button,
     Menu,
     MenuButton,
@@ -14,13 +12,12 @@ import {
     MenuDivider,
     useDisclosure,
     useColorModeValue,
-    Stack,
-    Text
+    Text,
 } from '@chakra-ui/react';
-import { FaHamburger, FaDoorClosed, FaPlus } from 'react-icons/fa';
-import { AiOutlinePlus } from 'react-icons/ai';
+import { FaPlus } from 'react-icons/fa';
 import NextLink from 'next/link';
-import { IAuth, useAuth } from '../lib/auth';
+import { IAuth, useAuth } from '../../lib/auth';
+import { SearchBar } from '../SearchBar';
 
 const NavLink = ({ children }: { children: ReactNode }) => (
     <Link
@@ -42,25 +39,17 @@ export default function Navbar() {
 
     return (
         <>
-            <Box bgColor={"green.500"} color={"white"} borderBottom={"1px"} borderColor={"gray.200"} px={12} py={1}>
-                <Flex h={16} alignItems={'center'} justifyContent={'space-between'} px={12}>
-                    <IconButton
-                        size={'md'}
-                        icon={isOpen ? <FaDoorClosed /> : <FaHamburger />}
-                        aria-label={'Open Menu'}
-                        display={{ md: 'none' }}
-                        onClick={isOpen ? onClose : onOpen}
-                    />
-                    <HStack spacing={8} alignItems={'center'}>
-                        <Box><Link fontWeight={"semibold"} fontSize={'xl'} style={{ textDecoration: 'none' }} as={NextLink} href="/">SportEventHub</Link></Box>
-                        <Box><Link style={{ textDecoration: 'none' }} as={NextLink} href="/dashboard">Events</Link></Box>
-                        <Box><Link style={{ textDecoration: 'none' }} as={NextLink} href="/dashboard">Help</Link></Box>
-                    </HStack>
-                    <Flex alignItems={'center'}>
+            <Box bg="white" zIndex={3} pos="fixed" width={'100%'} top="0" left='0' paddingBottom={'100px'} borderBottom={"1px"} borderColor={"gray.200"} px={12} py={1}>
+                <Flex h={16} alignItems={'center'} justifyContent={'space-between'} py={2}>
+                    <Box pl={220}>
+                        <SearchBar />
+                    </Box>
+                    <Box>
                         <Menu>
-                            <Button p={3} _hover={{ border: '1px', bgColor: "green.400" }} size={"xl"} variant={"outline"}><Text fontSize={'md'}>Create your event</Text></Button>
+                            <Button p={4} variant='outline' size={"xl"}><Text mr={2} fontSize={'md'}>Create your event</Text><FaPlus /></Button>
                             <MenuButton
-                                pl={3}
+                                _hover={{ textDecoration: "none" }}
+                                pl={4}
                                 as={Button}
                                 rounded={'full'}
                                 variant={'link'}
@@ -70,6 +59,7 @@ export default function Navbar() {
                                     size={'sm'}
                                     name={currentUser && `${currentUser?.firstName} ${currentUser?.lastName}`}
                                 />
+
                             </MenuButton>
                             <MenuList zIndex={3}>
                                 {!isLoggedIn && <MenuItem><Link color={'black'} style={{ textDecoration: 'none' }} as={NextLink} href="/register">Register</Link></MenuItem>}
@@ -83,7 +73,7 @@ export default function Navbar() {
 
                             </MenuList>
                         </Menu>
-                    </Flex>
+                    </Box>
                 </Flex>
             </Box >
         </>

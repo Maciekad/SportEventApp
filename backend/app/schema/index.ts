@@ -31,6 +31,7 @@ const schema = gql`
     id: ID!,
     title: String,
     description: String,
+    price: String,
     category: String,
     gender: String,
     img: String,

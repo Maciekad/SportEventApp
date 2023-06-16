@@ -18,6 +18,7 @@ const event = gql`
   id
   title
   description
+  price
   category
   gender
   img
@@ -83,7 +84,7 @@ export const getEventById = async (id: string): Promise<EventItem> => {
   return result.getEvent;
 }
 
-export const addEventAttendee = async (id: number, attendee: EventAttendee): Promise<EventItem> => {
-  const result = await graphQLClient.request<AddEventAttendeeResponsee>(addEventAttendeeMutation, { eventId: id, attendee })
+export const addEventAttendee = async (eventId: number, attendee: EventAttendee): Promise<EventItem> => {
+  const result = await graphQLClient.request<AddEventAttendeeResponsee>(addEventAttendeeMutation, { eventId: eventId, attendee })
   return result.addEventAttendee;
 }

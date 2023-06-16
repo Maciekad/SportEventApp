@@ -1,7 +1,7 @@
 import { ReactElement, useEffect } from 'react';
 import Router from 'next/router';
 import { useLoadingProgress } from '../../lib/loadingProgress';
-import { Container, Flex } from '@chakra-ui/react';
+import { Box, Container, Flex, Grid } from '@chakra-ui/react';
 
 type Props = {
     children: ReactElement | ReactElement[]
@@ -37,9 +37,9 @@ const MainLayout = ({ children, ...props }: Props) => {
     }, [])
 
     return (
-        <Container maxW="container.2xl" bgColor={"whitesmoke"} px={0}>
+        <Box bgColor={"whitesmoke"} paddingTop={'70px'} paddingLeft={'230px'}>
             {children}
-        </Container>
+        </Box>
     )
 }
 

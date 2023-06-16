@@ -11,7 +11,7 @@ const Home = () => {
             <Flex justifyContent={'center'}>
               <Image textAlign={'center'} src='/img/map.png' alt='mapPicture' />
             </Flex>
-            <Text textAlign={'center'} fontSize={'xl'} px={5} pt={5}>This is the easiest way to find your favourite sport event. Check place on map and see what is happening there.</Text>
+            <Text fontWeight={'light'} textAlign={'center'} fontSize={'xl'} px={5} pt={5}>This is the easiest way to find your favourite sport event. Check place on map and see what is happening there.</Text>
           </Box>
           <Flex p={6} justifyContent={'center'}>
             <Button size='lg' colorScheme='green'>
@@ -26,7 +26,7 @@ const Home = () => {
           <Flex justifyContent={'center'}>
             <Image src='/img/calendar.png' alt='mapPicture' />
           </Flex>
-          <Text textAlign={'center'} fontSize={'xl'} px={5} pt={5}>
+          <Text fontWeight={'light'} textAlign={'center'} fontSize={'xl'} px={5} pt={5}>
             Pick up the sport you like and invite others to play together. You can choose criteria like level of advancement for a better fit.
           </Text>
           <Flex p={6} justifyContent={'center'}>

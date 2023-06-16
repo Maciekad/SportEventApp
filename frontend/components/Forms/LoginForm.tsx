@@ -36,7 +36,7 @@ const LoginForm = () => {
     const onSubmit = async (value: Login) => {
         try {
             await login(value);
-            router.push('/');
+            router.push('/dashboard');
 
         } catch (error) {
             console.error('Register error')
