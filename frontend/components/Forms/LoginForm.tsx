@@ -7,6 +7,7 @@ import {
     Button,
     InputGroup,
     InputRightElement,
+    Flex,
 } from '@chakra-ui/react'
 import { useState } from 'react';
 import { IAuth, useAuth } from '../../lib/auth';
@@ -18,7 +19,13 @@ type FormData = {
     password: string;
 };
 
-const LoginForm = () => {
+interface LoginFormProps {
+    onClose: () => void
+}
+
+const LoginForm = (props: LoginFormProps) => {
+
+    const { onClose } = props;
 
     const [show, setShow] = useState(false)
     const handleClick = () => setShow(!show)
@@ -37,6 +44,7 @@ const LoginForm = () => {
         try {
             await login(value);
             router.push('/dashboard');
+            onClose();
 
         } catch (error) {
             console.error('Register error')
@@ -81,9 +89,12 @@ const LoginForm = () => {
                     {errors.password && errors.password.message}
                 </FormErrorMessage>
             </FormControl>
-            <Button mt={4} colorScheme='teal' isLoading={isSubmitting} type='submit'>
-                Submit
-            </Button>
+            <Flex my={5} justifyContent={'flex-end'}>
+                <Button colorScheme='green' isLoading={isSubmitting} type='submit'>
+                    Submit
+                </Button>
+                <Button onClick={onClose} ml={1} variant='ghost'>Cancel</Button>
+            </Flex>
         </form>
     )
 }

@@ -9,7 +9,7 @@ export const useProvideAuth = (): IAuth => {
     const [authToken, setAuthToken] = useState(null);
     const [currentUser, setCurrentUser] = useState<User | undefined>();
     const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const toast = useToast()
+    const toast = useToast();
 
     useEffect(() => {
         console.log("Hello from use Auth");

@@ -1,4 +1,4 @@
-import { GoogleMap, OverlayViewF, useLoadScript } from "@react-google-maps/api";
+import { GoogleMap, MarkerF, OverlayViewF, useLoadScript } from "@react-google-maps/api";
 import { useEffect, useState } from 'react';
 import { Coordinates } from '../../model/Coordinates';
 import { googleMapsApiKey, sulkowiceCoordinates } from '../../model/Constants';
@@ -6,7 +6,8 @@ import CustomMarker from "./CustomMarker";
 import EventItem from "../../model/EventItem";
 
 interface GoogleMapProps {
-    eventItems: EventItem[]
+    eventItems: EventItem[],
+    center: Coordinates
 }
 
 interface MapMarkerItem {
@@ -20,6 +21,8 @@ const MapComponent = (props: GoogleMapProps) => {
 
     const [markers, setMarkers] = useState<MapMarkerItem[]>();
 
+    const [markerPosition, setMarkerPosition] = useState<Coordinates>(center);
+
     const { isLoaded } = useLoadScript({
         googleMapsApiKey: googleMapsApiKey as string
     });
@@ -27,7 +30,7 @@ const MapComponent = (props: GoogleMapProps) => {
     const defaultMapOptions = {
         fullscreenControl: false,
         streetViewControl: false
-      };
+    };
 
     useEffect(() => {
 
@@ -60,7 +63,7 @@ const MapComponent = (props: GoogleMapProps) => {
             center={center}
             options={defaultMapOptions}
             mapContainerStyle={{ width: '100%', height: '85vh' }}
-            >
+        >
             {markers?.map((marker, index) => <OverlayViewF key={index} position={marker.position} mapPaneName={"floatPane"}><CustomMarker eventItems={marker.events} /></OverlayViewF>)}
         </GoogleMap>)
 };

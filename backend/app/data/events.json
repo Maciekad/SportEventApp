@@ -4,15 +4,12 @@
     "title": "Gra w siatkówkę",
     "description": "Dzień doberek! Gramy w siatkówkę na Chynowie o godzinie 16:00. Kto chętny proszę o sms do godziny 17:00",
     "price": "5zl/h",
-    "category": "Volleyball",
+    "discipline": "Volleyball",
     "gender": "Mix",
     "availablePlaces": 12,
     "signedPeople": 5,
     "img": "/img/volleyball.jpg",
-    "level": {
-      "num": 1,
-      "description": "Beginner"
-    },
+    "level": "Beginner",
     "address": {
       "street": "Szkolna 1",
       "city": "Chynów",
@@ -51,13 +48,10 @@
     "signedPeople": 12,
     "description": "Gramy w piłkę w Warszawie.",
     "price": "15zl/h",
-    "category": "Football",
+    "discipline": "Football",
     "gender": "Male",
     "img": "/img/football.jpg",
-    "level": {
-      "num": 2,
-      "description": "Advanced"
-    },
+    "level": "Advanced",
     "address": {
       "street": "Polki 3C",
       "city": "Warszawa",
@@ -82,15 +76,12 @@
     "title": "Gra w koszykówkę",
     "description": "Gramy w kosza w parku Szczesliwickim.",
     "price": "Free",
-    "category": "Basketball",
+    "discipline": "Basketball",
     "gender": "Male",
     "availablePlaces": 12,
     "signedPeople": 5,
     "img": "/img/basketball.jpg",
-    "level": {
-      "num": 5,
-      "description": "Recreational"
-    },
+    "level": "Recreational",
     "address": {
       "street": "Włodarzewska 55",
       "city": "Warszawa",
@@ -115,15 +106,12 @@
     "title": "Gra w tenisa",
     "description": "Gramy w tenisa na Ursynowie.",
     "price": "50zl/h",
-    "category": "Tennis",
+    "discipline": "Tennis",
     "gender": "Mix",
     "availablePlaces": 2,
     "signedPeople": 2,
     "img": "/img/tennis.jpg",
-    "level": {
-      "num": 2,
-      "description": "Semi-advanced"
-    },
+    "level": "Semi-advanced",
     "address": {
       "street": "Ludwika Hirszfelda 1",
       "city": "Warszawa",
@@ -148,15 +136,12 @@
     "title": "Jazda na rowerach",
     "description": "Jedziemy na wycieczkę rowerową do Góry Kalwarii.",
     "price": "Free",
-    "category": "Cycling",
+    "discipline": "Cycling",
     "gender": "Mix",
     "availablePlaces": 5,
     "signedPeople": 5,
     "img": "/img/cycling.jpg",
-    "level": {
-      "num": 3,
-      "description": "Advanced"
-    },
+    "level": "Advanced",
     "address": {
       "street": "Jeżynowa 8",
       "city": "Sułkowice",
@@ -181,15 +166,12 @@
     "title": "Gramy w haluwke",
     "description": "Gramy w pilke nozna na hali na Chynowie",
     "price": "10zl/h",
-    "category": "Football",
+    "discipline": "Football",
     "gender": "Female",
     "availablePlaces": 10,
     "signedPeople": 5,
     "img": "/img/football.jpg",
-    "level": {
-      "num": 2,
-      "description": "Beginner"
-    },
+    "level": "Beginner",
     "address": {
       "street": "Szkolna 1",
       "city": "Chynów",

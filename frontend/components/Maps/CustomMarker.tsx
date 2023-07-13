@@ -1,10 +1,11 @@
-import { Box, Card, CardBody, Image, Heading, Flex, HStack, Text, Avatar, AvatarGroup, VStack, Tag, Grid, Tooltip } from "@chakra-ui/react";
+import { Box, Card, CardBody, Image, Heading, Flex, HStack, Text, Avatar, AvatarGroup, VStack, Tag, Grid, Tooltip, Badge } from "@chakra-ui/react";
 import { FaCalendar, FaClock, FaMapMarkerAlt, FaMapPin, FaUserFriends } from "react-icons/fa";
 import { useState } from "react";
 import EventItem from "../../model/EventItem";
 import { MdKeyboardArrowRight } from "react-icons/md";
 import EventAttendee from "../../model/EventAttendee";
 import { useRouter } from "next/router";
+import { FiClock, FiMapPin } from "react-icons/fi";
 
 interface CustomMarkerProps {
     eventItems: EventItem[];
@@ -33,35 +34,39 @@ const CustomMarker = (props: CustomMarkerProps) => {
                                     alt='Green double couch with wooden legs'
                                     borderRadius='lg'
                                 />
-                                <CardBody px={2} py={3}>
-                                    <Grid gridTemplateColumns={'3fr 1fr'}>
-                                        <Flex direction={'column'} justifyContent={'space-between'} alignItems={'flex-start'}>
-                                            <Box pb={3}>
-                                                <Heading mr={20} color='gray.700' size='sm'>{ev.category}</Heading>
-                                                <Text fontWeight={'light'} fontSize={'sm'}>{ev.level.description}</Text>
-                                            </Box>
-                                            <AvatarGroup spacing={'-1'} max={6}>
-                                                {ev.attendees.map((at: EventAttendee) =>
-                                                    <Tooltip label={at.email}>
-                                                        <Avatar size={'xs'} name={`${at.firstName} ${at.lastName}`}>
-                                                        </Avatar>
-                                                    </Tooltip>)}
-                                            </AvatarGroup>
-
-                                            <Flex pl={1} pt={4} justifyContent={'space-between'} alignItems={'center'}>
-                                                <FaClock color="gray" /><Text fontWeight={'light'} fontSize={'sm'} pl={1}>Jul 12, 3:00pm</Text>
-                                            </Flex>
-
-                                        </Flex>
-                                        <Flex direction={'column'} justifyContent={'space-between'} alignItems={'flex-end'}>
-                                            <Box pb={6}>
-                                                <Tag size={'sm'} colorScheme="blue">{ev.attendees.length}/{ev.availablePlaces}</Tag>
-                                            </Box>
-
-                                            <MdKeyboardArrowRight color="gray" size={20} />
-                                            <Text fontSize={'sm'} pt={4}>20zl/h</Text>
-                                        </Flex>
-                                    </Grid>
+                                <CardBody>
+                                    <Flex pb={2} align="baseline">
+                                        <Badge colorScheme="blue">{ev.level}</Badge>
+                                        <Text
+                                            ml={2}
+                                            textTransform="uppercase"
+                                            fontSize="sm"
+                                            fontWeight="bold"
+                                            color="blue.800"
+                                        >
+                                            {ev.discipline}
+                                        </Text>
+                                    </Flex>
+                                    <Heading color='gray.700' pb={2} size='sm'>{ev.title}</Heading>
+                                    <Text pb={3} color='blue.600' fontSize='md'>
+                                        {ev.price}
+                                    </Text>
+                                    <Flex color='gray.700' pb={1} alignItems={'center'} fontSize="xs">
+                                        <FiClock size={15} /> <Text pl={1}>12th Aug | 4:00PM</Text>
+                                    </Flex>
+                                    <Flex color='gray.700' pb={3} alignItems={'center'} fontSize="xs">
+                                        <FiMapPin size={15} fontWeight={'bold'} /> <Text pl={1}>{ev.address.city}, {ev.address.street}</Text>
+                                    </Flex>
+                                    <Flex alignItems={'center'} justifyContent={'space-between'}>
+                                        <Text fontSize={'sm'}>{ev.attendees.length}/{ev.availablePlaces}</Text>
+                                        <AvatarGroup spacing={'-1'} max={6}>
+                                            {ev.attendees.map((at: EventAttendee) =>
+                                                <Tooltip label={at.email}>
+                                                    <Avatar size={'xs'} name={`${at.firstName} ${at.lastName}`}>
+                                                    </Avatar>
+                                                </Tooltip>)}
+                                        </AvatarGroup>
+                                    </Flex>
                                 </CardBody>
                             </Card>)
                         }

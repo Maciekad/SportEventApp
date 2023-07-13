@@ -7,7 +7,9 @@ import {
     Button,
     InputGroup,
     InputRightElement,
-    Text
+    Text,
+    Flex,
+    useToast
 } from '@chakra-ui/react'
 import { useState } from 'react';
 import { IAuth, useAuth } from '../../lib/auth';
@@ -15,15 +17,22 @@ import { User } from '../../model/User';
 import { registerUser } from "../../service/AuthService";
 
 type FormData = {
-    id: number;
+    id: string;
     email: string;
     firstName: string;
     lastName: string;
     password: string;
 };
 
-const RegisterForm = () => {
+interface RegisterFormProps {
+    onClose: () => void
+}
 
+const RegisterForm = (props: RegisterFormProps) => {
+
+    const { onClose } = props;
+
+    const toast = useToast();
     const [show, setShow] = useState(false)
     const handleClick = () => setShow(!show)
 
@@ -36,10 +45,16 @@ const RegisterForm = () => {
     } = useForm<FormData>()
 
     const onSubmit = async (value: User) => {
-        console.log(value); 
+        console.log(value);
         try {
             await registerUser(value)
-            setMessage('Succesfull register, Thank you!')
+            toast({
+                title: 'Success.',
+                description: "You were succesfully registered.",
+                status: 'success',
+                duration: 3000
+            })
+            onClose();
 
         } catch (error) {
             console.error('Register error')
@@ -112,10 +127,12 @@ const RegisterForm = () => {
                     {errors.password && errors.password.message}
                 </FormErrorMessage>
             </FormControl>
-            <Button mt={4} colorScheme='teal' isLoading={isSubmitting} type='submit'>
-                Submit
-            </Button>
-            <Text>{message}</Text>
+            <Flex my={5} justifyContent={'flex-end'}>
+                <Button colorScheme='green' isLoading={isSubmitting} type='submit'>
+                    Submit
+                </Button>
+                <Button onClick={onClose} ml={1} variant='ghost'>Cancel</Button>
+            </Flex>
         </form>
     )
 }

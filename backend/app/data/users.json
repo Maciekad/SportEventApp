@@ -26,5 +26,19 @@
     "lastName": "Ader",
     "password": "$2a$10$.AWfSQ4KI1uuKs3fbULo6OFcjCGCkA5ptcYaHX3lAbzxsVjilHcXW",
     "email": "m.adrych@gmail.com"
+  },
+  {
+    "id": 82,
+    "firstName": "mark",
+    "lastName": "wujek",
+    "password": "$2a$10$s7Zy02ByPcmL2yDEG8Iu.eEdoNx.dvR8RCg9Yl2G1wDRVlt1Obq3O",
+    "email": "m.wuj@gmail.com"
+  },
+  {
+    "id": 34,
+    "firstName": "mark",
+    "lastName": "rujek",
+    "password": "$2a$10$1jGj3oUu0eYbAmQM.jhk7eUlKCaQh/9GtWhyGw9DbYsvkgVoYfrIe",
+    "email": "m.ruj@gmail.com"
   }
 ]

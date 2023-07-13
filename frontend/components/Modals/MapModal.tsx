@@ -26,11 +26,11 @@ const MapModal = (props: ModalComponentProps) => {
         if (categoryFilters.size !== 0) {
 
             if (filterSections.isSportFilter) {
-                result = events.filter((ev: EventItem) => categoryFilters.has(ev.category));
+                result = events.filter((ev: EventItem) => categoryFilters.has(ev.discipline));
             }
 
             if (filterSections.isLevelFilter) {
-                result = result.filter((ev: EventItem) => categoryFilters.has(ev.level.description));
+                result = result.filter((ev: EventItem) => categoryFilters.has(ev.level));
             }
 
             if (filterSections.isGenderFilter) {

@@ -6,9 +6,9 @@ interface FiltersProps {
 }
 
 export enum Category {
-    SPORT = 'Sport',
-    LEVEL = 'Level',
-    GENDER = 'Gender'
+    DISCIPLINE = 'discipline',
+    LEVEL = 'level',
+    GENDER = 'gender'
 }
 
 interface CategoryFilters {
@@ -23,7 +23,7 @@ export interface FilterSections {
 }
 
 export const categories: CategoryFilters[] = [{
-    section: Category.SPORT,
+    section: Category.DISCIPLINE,
     filters: ['Volleyball', 'Football', 'Basketball', 'Tennis', 'Cycling']
 },
 {
@@ -57,7 +57,7 @@ const Filters = (props: FiltersProps) => {
     const setSectionFilters = (section: String, isEnabled: Boolean) => {
         props.setFilterSections(prev => {
 
-            if (section === Category.SPORT) prev.isSportFilter = isEnabled;
+            if (section === Category.DISCIPLINE) prev.isSportFilter = isEnabled;
             if (section === Category.LEVEL) prev.isLevelFilter = isEnabled;
             if (section === Category.GENDER) prev.isGenderFilter = isEnabled;
 

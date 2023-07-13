@@ -19,15 +19,12 @@ const event = gql`
   title
   description
   price
-  category
+  discipline
   gender
   img
   availablePlaces
   signedPeople
-  level {
-      num
-      description
-  }
+  level
   tags
   address {
       street

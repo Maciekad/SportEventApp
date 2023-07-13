@@ -3,10 +3,10 @@ import { GetServerSideProps, InferGetServerSidePropsType, NextPage } from "next/
 import { addEventAttendee, getEventById, getEventsList } from "../../service/EventsService";
 import { ParsedUrlQuery } from "querystring";
 import EventItem from "../../model/EventItem";
-import { Avatar, Box, Button, Card, Flex, Grid, HStack, Heading, Tag, Text, Tooltip, Tabs, TabList, Tab, TabPanels, TabPanel } from "@chakra-ui/react";
+import { Avatar, Box, Button, Card, Flex, Grid, HStack, Heading, Tag, Text, Tooltip, Tabs, TabList, Tab, TabPanels, TabPanel, Badge } from "@chakra-ui/react";
 import { GoogleMap, MarkerF, useLoadScript } from "@react-google-maps/api";
 import { googleMapsApiKey } from "../../model/Constants";
-import {  FaMapMarkerAlt, FaMapPin, FaPhone } from "react-icons/fa";
+import { FaMapMarkerAlt, FaMapPin, FaPhone } from "react-icons/fa";
 import { IAuth, useAuth } from "../../lib/auth";
 import { useEffect, useState } from "react";
 import EventAttendee from "../../model/EventAttendee";
@@ -72,15 +72,27 @@ const EventDetails: NextPage<Props> = ({
         }
     }
 
-    const { id, description, title, img, category, address, signedPeople, availablePlaces, gender, level, tags, coordinates, attendees } = event;
+    const { id, description, title, img, discipline, address, signedPeople, availablePlaces, gender, level, tags, coordinates, attendees } = event;
 
     return (
         <Container maxW={'8xl'} px={5}>
             <Grid templateColumns={'2fr 1fr'} py={5} gap={5}>
                 <Card p={5}>
-                    <Flex pb={5} justifyContent={'space-between'}>
+                    <Flex pb={4} justifyContent={'space-between'}>
                         <Box>
                             <Heading>{title}</Heading>
+                            <Flex py={1} align="baseline">
+                                <Badge colorScheme="blue">{discipline}</Badge>
+                                <Text
+                                    ml={2}
+                                    textTransform="uppercase"
+                                    fontSize="sm"
+                                    fontWeight="bold"
+                                    color="blue.800"
+                                >
+                                    {level} &bull; {gender}
+                                </Text>
+                            </Flex>
                         </Box>
                         <Box>
                             <Tag mr={2} size={'lg'}>JAN 25</Tag>
@@ -88,11 +100,11 @@ const EventDetails: NextPage<Props> = ({
                         </Box>
                     </Flex>
 
-                    <Text fontWeight={'semibold'} textColor={''} fontSize={'xl'} pb={5}>{level.description}</Text>
+                    <Text fontWeight={'semibold'} textColor={''} fontSize={'xl'} pb={5}>{level}</Text>
 
                     <Text pb={5} fontWeight={'light'}>Saturday, January, 10 2023</Text>
 
-                    
+
                     <HStack pb={2}><FaMapMarkerAlt size={30} color="red" /><Text>{address.city}, {address.street}</Text></HStack>
 
                     <Flex justifyContent={'space-between'} alignItems={'center'}>
@@ -132,8 +144,6 @@ const EventDetails: NextPage<Props> = ({
                         </TabPanels>
                     </Tabs>
                 </Card>
-
-
                 <Card p={5}>
                     <Flex alignItems={'center'} justifyContent={'space-between'}>
                         <Box>
@@ -143,8 +153,6 @@ const EventDetails: NextPage<Props> = ({
                         <Button filter={!isLoggedIn ? 'auto' : 'initial'} blur={'4px'}><FaPhone /><Text pl={2}>664120444</Text></Button>
                     </Flex>
                 </Card>
-
-
             </Grid>
         </Container >
 

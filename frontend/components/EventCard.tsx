@@ -9,7 +9,7 @@ interface EventCardProps {
 }
 
 const EventCard = (props: EventCardProps) => {
-    const { id, title, price, attendees, category, img, address, signedPeople, availablePlaces, gender, level, tags } = props.eventItem;
+    const { id, title, price, attendees, discipline, img, address, signedPeople, availablePlaces, gender, level, tags } = props.eventItem;
 
     const router = useRouter();
     return (
@@ -26,7 +26,7 @@ const EventCard = (props: EventCardProps) => {
             />
             <CardBody px={5} pb={5}>
                 <Flex pb={4} align="baseline">
-                    <Badge colorScheme="blue">{level.description}</Badge>
+                    <Badge colorScheme="blue">{level}</Badge>
                     <Text
                         ml={2}
                         textTransform="uppercase"
@@ -34,11 +34,11 @@ const EventCard = (props: EventCardProps) => {
                         fontWeight="bold"
                         color="blue.800"
                     >
-                        {category} &bull; {gender}
+                        {discipline} &bull; {gender}
                     </Text>
                 </Flex>
                 <Heading color='gray.700' pb={2} size='md'>{title}</Heading>
-                <Text pb={3} color='blue.600' fontSize='2xl'>
+                <Text pb={3} color='blue.600' fontSize='xl'>
                     {price}
                 </Text>
                 <Flex color='gray.700' pb={1} alignItems={'center'} fontSize="sm">

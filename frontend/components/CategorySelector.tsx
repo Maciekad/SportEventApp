@@ -1,8 +1,7 @@
 import { Image, Flex, Text, Button } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import { AiFillFilter } from "react-icons/ai";
-import { BiTennisBall, BiCycling } from "react-icons/bi";
-import { FaVolleyballBall, FaFutbol, FaBasketballBall, FaMap } from "react-icons/fa";
+import { BiCycling } from "react-icons/bi";
 
 interface CategorySelectorProps {
     onModalOpen: () => void;

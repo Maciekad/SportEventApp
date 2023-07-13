@@ -32,12 +32,12 @@ const schema = gql`
     title: String,
     description: String,
     price: String,
-    category: String,
+    discipline: String,
     gender: String,
     img: String,
     availablePlaces: String,
     signedPeople: Int,
-    level: Level,
+    level: String,
     tags: [String],
     address: Address,
     coordinates: Coordinates
@@ -61,11 +61,6 @@ const schema = gql`
   type Coordinates {
     lat: Float,
     lng: Float
-  }
-
-  type Level {
-    num: Int,
-    description: String
   }
 
   input AttendeeInput {

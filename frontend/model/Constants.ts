@@ -27,3 +27,5 @@ export const levels = {
       description: "Zaawansowany",
     },
   };
+
+export { Coordinates };
